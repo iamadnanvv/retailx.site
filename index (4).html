@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RetailX — Your Business, Upgraded</title>
+<meta name="description" content="A premium static website in 5 days for a flat fee of ₹1599. Engineered for speed, designed for impact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['Space Grotesk', 'sans-serif'],
+          mono: ['JetBrains Mono', 'monospace'],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  :root{
+    --bg:#FAFAF9;
+    --ink:#0B0B0E;
+    --violet:#5B4FE0;
+    --violet-deep:#453BC2;
+    --lime:#D4FF3D;
+    --line:#E4E4E1;
+    --muted:#6B6B70;
+    --panel:#F1F0EC;
+  }
+  *{ -webkit-font-smoothing:antialiased; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+  }
+  .font-display{ font-family:'Space Grotesk',ui-sans-serif,sans-serif; }
+  .font-mono{ font-family:'JetBrains Mono',ui-monospace,monospace; }
+
+  .noise-line{
+    background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 100%;
+  }
+
+  .btn-primary{
+    background:var(--ink);
+    color:var(--lime);
+    transition: transform .35s cubic-bezier(.19,1,.22,1), background .3s ease;
+  }
+  .btn-primary:hover{ background:var(--violet-deep); color:#fff; transform: translateY(-2px); }
+  .btn-primary:active{ transform: translateY(0); }
+
+  .btn-ghost{
+    border:1px solid var(--ink);
+    color:var(--ink);
+    transition: background .3s ease, color .3s ease;
+  }
+  .btn-ghost:hover{ background:var(--ink); color:var(--lime); }
+
+  .reveal{
+    opacity:0;
+    transform: translateY(24px);
+    transition: opacity .8s cubic-bezier(.19,1,.22,1), transform .8s cubic-bezier(.19,1,.22,1);
+  }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+  /* Build meter — signature element */
+  .meter-track{
+    position:relative;
+    height:6px;
+    background: var(--line);
+    border-radius:999px;
+    overflow:hidden;
+  }
+  .meter-fill{
+    position:absolute; inset:0 auto 0 0;
+    width:0%;
+    background: linear-gradient(90deg, var(--violet), var(--lime));
+    border-radius:999px;
+    animation: fillMeter 4s cubic-bezier(.65,0,.35,1) infinite;
+  }
+  @keyframes fillMeter{
+    0%{ width:2%; }
+    45%{ width:100%; }
+    65%{ width:100%; }
+    66%{ width:2%; opacity:0; }
+    67%{ opacity:1; }
+    100%{ width:2%; }
+  }
+
+  .day-dot{
+    width:10px; height:10px; border-radius:999px;
+    background:var(--line);
+    transition: background .3s ease;
+  }
+  .day-active .day-dot{ background:var(--violet); }
+  .day-active .day-dot.lime{ background:var(--lime); }
+
+  .field{
+    background:transparent;
+    border:0;
+    border-bottom:1.5px solid var(--line);
+    transition: border-color .25s ease;
+  }
+  .field:focus{ outline:none; border-color:var(--violet); }
+  .field::placeholder{ color:#A8A8AC; }
+
+  select.field{
+    appearance:none; -webkit-appearance:none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%236B6B70' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position: right 4px center;
+    padding-right:28px;
+  }
+  select.field option{ color:var(--ink); }
+  select.field:invalid{ color:#A8A8AC; }
+
+  .card-pop{ transition: transform .4s cubic-bezier(.19,1,.22,1), box-shadow .4s ease; }
+  .card-pop:hover{ transform: translateY(-6px); box-shadow: 0 24px 48px -20px rgba(11,11,14,0.25); }
+
+  ::selection{ background:var(--lime); color:var(--ink); }
+
+  /* Fluid, clamped headline sizing — safe on narrow viewports, no runaway vw scaling */
+  .h1-fluid{ font-size: clamp(2.5rem, 5.6vw + 1.2rem, 5.2rem); }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+    outline: 2px solid var(--violet);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ transition:none; opacity:1; transform:none; }
+    .meter-fill{ animation:none; width:60%; }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- NAV -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-[color:var(--bg)]/80 border-b border-[color:var(--line)]">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#top" class="font-display font-bold text-lg tracking-tight">RetailX<span style="color:var(--violet)">.</span></a>
+    <nav class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest text-[color:var(--muted)]">
+      <a href="#offer" class="hover:text-[color:var(--ink)] transition-colors">Offer</a>
+      <a href="#standard" class="hover:text-[color:var(--ink)] transition-colors">The Standard</a>
+      <a href="#intake" class="hover:text-[color:var(--ink)] transition-colors">Start Project</a>
+    </nav>
+    <a href="#intake" class="btn-primary font-mono text-xs uppercase tracking-widest px-4 py-2.5 rounded-full">Pre-Order — ₹1599</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="top" class="relative pt-32 sm:pt-40 pb-24 sm:pb-28 px-6 noise-line">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex items-center gap-3 mb-8 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]">
+      <span class="w-2 h-2 rounded-full" style="background:var(--lime)"></span>
+      Static. Fast. Live in 5 days.
+    </div>
+
+    <h1 class="h1-fluid font-display font-bold leading-[1.02] tracking-tight max-w-3xl">
+      Your Business, Upgraded. A Premium Static Website <span style="color:var(--violet)">in 5 Days.</span>
+    </h1>
+
+    <p class="mt-8 text-lg sm:text-xl text-[color:var(--muted)] max-w-xl leading-relaxed">
+      Engineered for speed, designed for impact. Get a bespoke, high-performance website for a flat fee of
+      <span class="font-mono font-medium text-[color:var(--ink)]">₹1599.</span>
+    </p>
+
+    <div class="mt-10 flex flex-wrap items-center gap-4">
+      <a href="#intake" class="btn-primary font-mono text-sm uppercase tracking-widest px-7 py-4 rounded-full">Pre-Order Your Website →</a>
+      <a href="#standard" class="btn-ghost font-mono text-sm uppercase tracking-widest px-7 py-4 rounded-full">See How It Works</a>
+    </div>
+
+    <!-- Signature build meter -->
+    <div class="mt-20 max-w-md">
+      <div class="flex justify-between font-mono text-[11px] uppercase tracking-widest text-[color:var(--muted)] mb-2">
+        <span>Build status</span>
+        <span>Day 1 → Day 5</span>
+      </div>
+      <div class="meter-track"><div class="meter-fill"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PROP -->
+<section id="standard" class="py-28 px-6 border-t border-[color:var(--line)]">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal flex items-end justify-between flex-wrap gap-6 mb-16">
+      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight">The 2026<br>Standard.</h2>
+      <p class="max-w-sm text-[color:var(--muted)] font-mono text-sm leading-relaxed">
+        No bloated CMS. No plugin debt. Just architecture built for how the web actually gets used in 2026.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-px bg-[color:var(--line)] border border-[color:var(--line)]">
+      <div class="reveal card-pop bg-[color:var(--bg)] p-10 flex flex-col gap-6">
+        <span class="font-mono text-xs text-[color:var(--muted)]">01 / Mobile-First</span>
+        <h3 class="font-display font-semibold text-2xl leading-snug">Built for the palm of a hand.</h3>
+        <p class="text-[color:var(--muted)] leading-relaxed">Every layout starts at 375px and scales up — because that's where your customers actually are.</p>
+      </div>
+      <div class="reveal card-pop bg-[color:var(--bg)] p-10 flex flex-col gap-6">
+        <span class="font-mono text-xs text-[color:var(--muted)]">02 / Static-Speed</span>
+        <h3 class="font-display font-semibold text-2xl leading-snug">Loads before they blink.</h3>
+        <p class="text-[color:var(--muted)] leading-relaxed">Zero server round-trips, zero database lag. Pure static architecture built for sub-second loads.</p>
+      </div>
+      <div class="reveal card-pop bg-[color:var(--bg)] p-10 flex flex-col gap-6">
+        <span class="font-mono text-xs text-[color:var(--muted)]">03 / Conversion-Ready</span>
+        <h3 class="font-display font-semibold text-2xl leading-snug">Designed to close, not just look good.</h3>
+        <p class="text-[color:var(--muted)] leading-relaxed">Every section is placed with intent — CTAs, trust signals, and flow tested to turn visits into leads.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section id="offer" class="py-28 px-6" style="background:var(--ink); color:#fff;">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal grid lg:grid-cols-[1fr_auto] gap-16 items-start">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--lime)">The Offer</span>
+        <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight mt-4 mb-8">
+          One flat fee.<br>Five working days.
+        </h2>
+        <p class="text-white/60 max-w-md leading-relaxed mb-10">
+          A complete, launch-ready static website — copy structure, layout, mobile optimization, and deployment included.
+          Domain registration is billed separately at cost, so you always know exactly what you're paying for.
+        </p>
+
+        <!-- Timeline reusing the meter motif -->
+        <div class="flex items-center gap-3 flex-wrap">
+          <div class="day-active flex items-center gap-2"><span class="day-dot"></span><span class="font-mono text-xs text-white/70">Day 1 · Brief</span></div>
+          <div class="w-8 h-px bg-white/20"></div>
+          <div class="day-active flex items-center gap-2"><span class="day-dot"></span><span class="font-mono text-xs text-white/70">Day 2–3 · Build</span></div>
+          <div class="w-8 h-px bg-white/20"></div>
+          <div class="day-active flex items-center gap-2"><span class="day-dot lime"></span><span class="font-mono text-xs text-white/70">Day 4 · Review</span></div>
+          <div class="w-8 h-px bg-white/20"></div>
+          <div class="day-active flex items-center gap-2"><span class="day-dot lime"></span><span class="font-mono text-xs text-white">Day 5 · Launch</span></div>
+        </div>
+      </div>
+
+      <div class="card-pop border border-white/15 rounded-2xl p-10 w-full lg:w-80 shrink-0" style="background:#111114;">
+        <div class="font-mono text-xs uppercase tracking-widest text-white/40 mb-3">Flat fee</div>
+        <div class="font-display font-bold text-6xl mb-1">₹1599</div>
+        <div class="font-mono text-xs text-white/40 mb-8">domain billed separately</div>
+        <ul class="space-y-3 text-sm text-white/80 mb-10">
+          <li class="flex gap-2"><span style="color:var(--lime)">—</span> Bespoke static website</li>
+          <li class="flex gap-2"><span style="color:var(--lime)">—</span> 5-day delivery window</li>
+          <li class="flex gap-2"><span style="color:var(--lime)">—</span> Mobile-first, conversion-ready</li>
+          <li class="flex gap-2"><span style="color:var(--lime)">—</span> WhatsApp integration on request</li>
+        </ul>
+        <a href="#intake" class="block text-center font-mono text-xs uppercase tracking-widest py-4 rounded-full" style="background:var(--lime); color:var(--ink);">Pre-Order Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT INTAKE FORM -->
+<section id="intake" class="py-28 px-6 border-b border-[color:var(--line)]">
+  <div class="max-w-3xl mx-auto">
+    <div class="reveal mb-16">
+      <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--violet)">Start Your Project</span>
+      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight mt-4 mb-4">Tell us what<br>you're building.</h2>
+      <p class="text-[color:var(--muted)] max-w-lg">Five minutes of your time gets the build started. The more specific you are, the closer day one gets to your finished site.</p>
+    </div>
+
+    <form id="intake-form" class="reveal space-y-14">
+
+      <!-- Basic Info -->
+      <fieldset class="space-y-6">
+        <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Basic Info</legend>
+        <div class="grid sm:grid-cols-2 gap-8">
+          <div>
+            <label class="block font-mono text-xs text-[color:var(--muted)] mb-2">Full Name</label>
+            <input required type="text" name="full_name" placeholder="Aisha Verma" class="field w-full py-2 text-lg">
+          </div>
+          <div>
+            <label class="block font-mono text-xs text-[color:var(--muted)] mb-2">Business Name</label>
+            <input required type="text" name="business_name" placeholder="Verma Textiles Co." class="field w-full py-2 text-lg">
+          </div>
+          <div>
+            <label class="block font-mono text-xs text-[color:var(--muted)] mb-2">Phone Number</label>
+            <input required type="tel" name="phone" placeholder="+91 98765 43210" class="field w-full py-2 text-lg">
+          </div>
+          <div>
+            <label class="block font-mono text-xs text-[color:var(--muted)] mb-2">Email</label>
+            <input required type="email" name="email" placeholder="you@business.com" class="field w-full py-2 text-lg">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Project Assets -->
+      <fieldset class="space-y-6">
+        <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Project Assets</legend>
+        <div>
+          <label class="block font-mono text-xs text-[color:var(--muted)] mb-2">Drive / Dropbox / WeTransfer Link</label>
+          <input type="url" name="asset_link" placeholder="Link to your logo, brand imagery, and videos" class="field w-full py-2 text-lg">
+          <p class="mt-2 text-xs text-[color:var(--muted)]">No assets yet? Leave this blank — we'll follow up.</p>
+        </div>
+      </fieldset>
+
+      <!-- Functional Requirements -->
+      <fieldset class="space-y-6">
+        <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Functional Requirements</legend>
+        <div class="grid sm:grid-cols-3 gap-3">
+          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
+            <input type="checkbox" name="sections" value="Hero" class="accent-[color:var(--violet)]"> <span class="text-sm">Hero</span>
+          </label>
+          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
+            <input type="checkbox" name="sections" value="About" class="accent-[color:var(--violet)]"> <span class="text-sm">About</span>
+          </label>
+          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
+            <input type="checkbox" name="sections" value="Services" class="accent-[color:var(--violet)]"> <span class="text-sm">Services</span>
+          </label>
+          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
+            <input type="checkbox" name="sections" value="Contact" class="accent-[color:var(--violet)]"> <span class="text-sm">Contact</span>
+          </label>
+          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
+            <input type="checkbox" name="sections" value="WhatsApp Integration" class="accent-[color:var(--violet)]"> <span class="text-sm">WhatsApp</span>
+          </label>
+          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
+            <input type="checkbox" name="sections" value="Gallery" class="accent-[color:var(--violet)]"> <span class="text-sm">Gallery</span>
+          </label>
+        </div>
+        <textarea name="other_sections" rows="2" placeholder="Anything else? Testimonials, pricing table, booking form…" class="field w-full py-2 resize-none"></textarea>
+      </fieldset>
+
+      <!-- Domain Strategy -->
+      <fieldset class="space-y-6">
+        <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Domain Strategy</legend>
+        <select name="domain_strategy" class="field w-full py-2 text-lg">
+          <option value="">Select an option</option>
+          <option value="custom">Custom Domain (Paid, billed separately)</option>
+          <option value="subdomain">Free RetailX Subdomain</option>
+        </select>
+      </fieldset>
+
+      <!-- Creative Brief -->
+      <fieldset class="space-y-6">
+        <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Creative Brief</legend>
+        <textarea name="creative_brief" rows="4" placeholder="Design goals, preferred colors, reference sites you like…" class="field w-full py-2 resize-none"></textarea>
+      </fieldset>
+
+      <button type="submit" class="btn-primary font-mono text-sm uppercase tracking-widest px-8 py-4 rounded-full">Submit Project Brief →</button>
+      <p id="form-note" class="font-mono text-xs text-[color:var(--muted)]">We'll open WhatsApp with your brief pre-filled — hit send there to confirm.</p>
+    </form>
+  </div>
+</section>
+
+<!-- SUCCESS MODAL -->
+<div id="success-modal" class="fixed inset-0 z-[100] hidden items-center justify-center px-6" aria-hidden="true">
+  <div id="success-backdrop" class="absolute inset-0 bg-[color:var(--ink)]/70 backdrop-blur-sm"></div>
+  <div class="relative w-full max-w-md rounded-2xl p-8 sm:p-10 text-center card-pop" style="background:#111114; color:#fff;">
+    <div class="mx-auto mb-6 w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--lime);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M5 13l4 4L19 7" stroke="#0B0B0E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h3 class="font-display font-bold text-2xl mb-3">Thanks for choosing us!</h3>
+    <p class="text-white/70 text-sm mb-8">Your project brief was sent on WhatsApp. Complete your pre-order with the payment link below to lock in your build slot.</p>
+    <a href="https://razorpay.com/payment-link/plink_TIvxE12DZ3a2us" target="_blank" rel="noopener" class="block text-center font-mono text-xs uppercase tracking-widest py-4 rounded-full mb-3" style="background:var(--lime); color:var(--ink);">Pay Now — ₹1599</a>
+    <button id="success-close" type="button" class="w-full text-center font-mono text-xs uppercase tracking-widest py-3 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-white/40 transition-colors">Close</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="py-16 px-6">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-10">
+    <div>
+      <div class="font-display font-bold text-2xl tracking-tight mb-3">RetailX<span style="color:var(--violet)">.</span></div>
+      <p class="text-[color:var(--muted)] text-sm max-w-xs">Premium static websites, delivered in 5 days flat.</p>
+    </div>
+    <div class="flex flex-col gap-2 font-mono text-sm">
+      <span class="text-[color:var(--muted)] text-xs uppercase tracking-widest mb-1">Contact</span>
+      <a href="https://instagram.com/retailx.site" class="hover:text-[color:var(--violet)] transition-colors">Instagram — @retailx.site</a>
+      <a href="mailto:adwebcomicllp@gmail.com" class="hover:text-[color:var(--violet)] transition-colors">adwebcomicllp@gmail.com</a>
+      <a href="https://wa.me/919656778508" class="hover:text-[color:var(--violet)] transition-colors">+91 96567 78508</a>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto mt-14 pt-6 border-t border-[color:var(--line)] text-xs font-mono text-[color:var(--muted)]">
+    © 2026 RetailX. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Intake form handling — packages the brief into a WhatsApp message, then shows the payment popup.
+  const form = document.getElementById('intake-form');
+  const note = document.getElementById('form-note');
+  const WHATSAPP_NUMBER = '919656778508'; // +91 9656778508
+
+  const modal = document.getElementById('success-modal');
+  const backdrop = document.getElementById('success-backdrop');
+  const closeBtn = document.getElementById('success-close');
+
+  function openModal(){
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+    const sections = data.getAll('sections').join(', ') || '—';
+
+    const lines = [
+      '*New Project Brief — RetailX*',
+      '',
+      `*Full Name:* ${data.get('full_name') || '—'}`,
+      `*Business Name:* ${data.get('business_name') || '—'}`,
+      `*Phone:* ${data.get('phone') || '—'}`,
+      `*Email:* ${data.get('email') || '—'}`,
+      `*Asset Link:* ${data.get('asset_link') || '—'}`,
+      `*Sections Needed:* ${sections}`,
+      `*Other Sections:* ${data.get('other_sections') || '—'}`,
+      `*Domain Strategy:* ${data.get('domain_strategy') || '—'}`,
+      `*Creative Brief:* ${data.get('creative_brief') || '—'}`,
+    ];
+
+    const message = encodeURIComponent(lines.join('\n'));
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+    // Open WhatsApp with the brief pre-filled so the user just hits send.
+    window.open(whatsappUrl, '_blank', 'noopener');
+
+    note.textContent = "Brief sent to WhatsApp. Confirm it there, then complete payment below.";
+    note.style.color = 'var(--violet)';
+    form.querySelectorAll('input, textarea, select, button').forEach(el => el.disabled = true);
+
+    openModal();
+  });
+</script>
+
+</body>
+</html>
