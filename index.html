@@ -139,6 +139,8 @@
     .meter-fill{ animation:none; width:60%; }
   }
 </style>
+  <link rel="alternate" type="text/plain" href="/llms.txt">
+  <link rel="alternate" type="text/plain" href="/llms-full.txt">
 </head>
 <body class="antialiased">
 
@@ -457,6 +459,7 @@
     openModal();
   });
 </script>
-
+<script>fetch('/llms.txt').then(r=>r.text()).then(t=>(window.LLMS=t,document.head.insertAdjacentHTML('beforeend','<meta name="llms" content="/llms.txt">'))).catch(console.error);</script>
+  <script>fetch('/llms-full.txt').then(r=>r.text()).then(t=>(window.LLMS=t,document.head.insertAdjacentHTML('beforeend','<meta name="llms-full" content="/llms-full.txt">'))).catch(console.error);</script>
 </body>
 </html>
