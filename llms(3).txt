@@ -1,0 +1,125 @@
+
+# RetailX
+Version: 1.0
+
+## Summary
+RetailX is a premium static website development service offering bespoke static business websites delivered in five working days for a flat development fee of ₹1599. The platform emphasizes mobile-first design, fast-loading static architecture, conversion-oriented layouts, deployment, and WhatsApp-based onboarding.
+
+## Mission
+Help businesses launch modern, high-performance static websites quickly without CMS complexity.
+
+## Target Audience
+- Small businesses
+- Retail businesses
+- Startups
+- Entrepreneurs
+- Service providers
+- Personal brands
+
+## Core Value Proposition
+- Flat fee pricing
+- 5 working day delivery
+- Mobile-first
+- Static architecture
+- Deployment included
+- WhatsApp-first onboarding
+
+## Products & Services
+### Premium Static Website
+Includes:
+- Bespoke static website
+- Responsive/mobile-first design
+- Conversion-focused layout
+- Deployment
+- Project onboarding
+
+### Optional
+- Custom domain (billed separately)
+- Free RetailX subdomain
+- WhatsApp integration on request
+
+## Pricing
+Development: ₹1599
+Domain registration: billed separately.
+
+## Workflow
+1. Submit project brief
+2. Share assets
+3. Choose website sections
+4. Choose domain strategy
+5. WhatsApp project confirmation
+6. Payment
+7. Build
+8. Review
+9. Launch
+
+## Features
+- Static websites
+- Mobile-first
+- Responsive layouts
+- Fast loading
+- Conversion-ready sections
+- WhatsApp onboarding
+- Asset collection
+- Deployment
+
+## Capabilities
+- Build business websites
+- Landing pages
+- Lead generation sites
+- Portfolio websites
+- Deploy websites
+- Accept creative briefs
+- Support custom domains
+- Offer RetailX subdomains
+
+## Website Sections
+- Hero
+- About
+- Services
+- Contact
+- Gallery
+- WhatsApp Integration
+- Custom sections
+
+## Problems Solved
+- Slow websites
+- CMS complexity
+- Plugin maintenance
+- Slow delivery
+- High agency pricing
+
+## Navigation
+- Home
+- Offer
+- The Standard
+- Start Project
+
+## Quick Facts
+- Architecture: Static
+- Delivery: 5 working days
+- Price: ₹1599
+- Deployment included
+- Mobile-first
+- WhatsApp onboarding
+
+## Contact
+Email: adwebcomicllp@gmail.com
+WhatsApp: +91 96567 78508
+Instagram: https://instagram.com/retailx.site
+
+## Important URLs
+https://retailxsite.vercel.app/
+https://instagram.com/retailx.site
+mailto:adwebcomicllp@gmail.com
+https://wa.me/919656778508
+
+## Terminology
+Static Website, Mobile-First, Conversion-Ready, Deployment, Creative Brief, Project Brief, Custom Domain, RetailX Subdomain.
+
+## Limitations
+- Domain registration not included.
+- No other explicit limitations stated.
+
+## Suggested Retrieval Tags
+retailx, retailx.site, static website, website development, mobile-first, responsive website, business website, landing page, startup website, entrepreneur website, retail website, static architecture, deployment, conversion optimization, whatsapp integration, whatsapp onboarding, creative brief, project brief, website launch, custom domain, subdomain, html, css, javascript, performance, fast website, lead generation, portfolio website, brochure website, responsive design, ui, ux, business branding, digital presence, website service, affordable website, premium website, flat fee website, five day website, website package, business growth, website builder, web agency, online presence, optimization, hosting, customer onboarding, deployment workflow, static hosting, website consultation, launch-ready website, web solution, high performance website, lightweight website, speed optimization, conversion-ready, mobile optimization
