@@ -144,6 +144,48 @@
   <link rel="alternate" type="text/plain" href="/llms.txt">
   <link rel="alternate" type="text/plain" href="/llms-full.txt">
 </head>
+  <style>
+body{font-family:Arial,sans-serif}
+.lead-popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center}
+.lead-popup-container{background:#fff;border-radius:18px;padding:28px;max-width:360px;width:90%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.lead-popup-close{position:absolute;right:14px;top:10px;border:none;background:none;font-size:24px;cursor:pointer}
+.lead-popup-title{font-size:34px;font-weight:800;line-height:1.1}.lead-popup-title span{color:#4F46E5}
+.lead-popup-subtitle{font-size:14px;color:#666}
+.lead-form-field{width:100%;box-sizing:border-box;margin:10px 0;padding:14px;border:1px solid #ddd;border-radius:10px}
+textarea.lead-form-field{height:80px}
+.lead-form-button{width:100%;padding:15px;border:none;border-radius:10px;background:#4F46E5;color:#fff;font-weight:bold;cursor:pointer}
+.lead-popup-note{text-align:center;color:#888;font-size:12px;margin-top:10px}
+.lead-popup-footer{text-align:center;margin-top:18px;padding-top:16px;border-top:1px solid #eee}
+.lead-popup-footer a{text-decoration:none;color:#666;font-size:12px}
+</style></head><body>
+<div class="lead-popup-overlay">
+<div class="lead-popup-container">
+<button class="lead-popup-close" onclick="document.querySelector('.lead-popup-overlay').style.display='none'">&times;</button>
+<h2 class="lead-popup-title">Get Your High-Speed Website in Just <span>5 Days.</span></h2>
+<p class="lead-popup-subtitle">Share your details and our team will get in touch with you.</p>
+<form onsubmit="submitLeadForm(event)">
+<input class="lead-form-field" name="name" placeholder="Your Name" required>
+<input class="lead-form-field" name="phone" placeholder="Phone Number" required>
+<input class="lead-form-field" type="email" name="email" placeholder="Email Address" required>
+<textarea class="lead-form-field" name="project" placeholder="Tell us about your project..."></textarea>
+<button class="lead-form-button">Get My Free Consultation →</button>
+</form>
+<div class="lead-popup-note">🔒 We respect your privacy. No spam, ever.</div>
+<div class="lead-popup-footer">
+<a href="https://widgetify.vercel.app" target="_blank">Powered by Widgetify</a>
+</div></div></div>
+<script>
+function submitLeadForm(e){
+e.preventDefault();
+const f=new FormData(e.target);
+let msg='🚀 New Website Lead\n\n';
+msg+='Name: '+f.get('name')+'\n';
+msg+='Phone: '+f.get('phone')+'\n';
+msg+='Email: '+f.get('email')+'\n';
+msg+='Project: '+f.get('project');
+window.open('https://wa.me/9656778508?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
 <body class="antialiased">
 
 <!-- NAV -->
