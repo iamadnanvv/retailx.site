@@ -1,0 +1,45 @@
+# RetailX
+
+RetailX is a website development service focused on building fast, responsive static websites. The project presents a flat-fee offer for premium static websites designed for small businesses, startups, retail businesses, and service providers.
+
+## Service positioning
+RetailX emphasizes:
+- Static website builds instead of CMS-heavy or plugin-driven setups
+- Mobile-first, responsive design
+- Speed and lightweight architecture
+- Conversion-focused layouts for lead generation and business presentation
+- Quick deployment and launch support
+
+## Offer details
+- Package: Premium static website
+- Price: ₹1599 flat development fee
+- Delivery time: 5 working days
+- Domain: custom domain or free RetailX subdomain options available; domain charges are billed separately
+- Project onboarding: WhatsApp-first intake and brief submission
+
+## Timeline
+1. Day 1: brief and project onboarding
+2. Days 2-3: development and build
+3. Day 4: review and feedback
+4. Day 5: launch and deployment
+
+## Included service scope
+- Bespoke static website
+- Responsive/mobile-first layout
+- Conversion-focused sections
+- Deployment support
+- Project brief intake
+- Optional WhatsApp integration request
+
+## Contact and links
+- Website: https://retailxsite.vercel.app/
+- Offer section: https://retailxsite.vercel.app/#offer
+- Standard section: https://retailxsite.vercel.app/#standard
+- Start Project: https://retailxsite.vercel.app/#intake
+- Agreement page: https://retailxsite.vercel.app/agreement.html
+- Email: adwebcomicllp@gmail.com
+- WhatsApp: https://wa.me/919656778508
+- Instagram: https://instagram.com/retailx.site
+
+## Notes
+The information above is derived from the existing RetailX website and project content. It is intentionally limited to verified public details and avoids unsupported claims or invented service terms.
