@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RetailX — Your Business, Upgraded</title>
-<meta name="description" content="A premium static website in 5 days for a flat fee of ₹1599. Engineered for speed, designed for impact.">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/27sFLpCH/image.png"><link rel="apple-touch-icon" href="https://i.ibb.co/27sFLpCH/image.png"><link rel="shortcut icon" href="https://i.ibb.co/27sFLpCH/image.png">
+<title>RetailX — Websites That Turn Visitors Into Leads</title>
+<meta name="description" content="RetailX builds conversion-focused business websites with clear calls to action, mobile-first design, and WhatsApp-ready lead generation for service businesses." />
+<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/27sFLpCH/image.png"><link rel="apple-touch-icon" href="https://i.ibb.co/27sFLpCH/image.png"><link rel="shortcut icon" href="https://i.ibb.co/27sFLpCH/image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/27sFLpCH/image.png"><link rel="apple-touch-icon" href="https://i.ibb.co/27sFLpCH/image.png"><link rel="shortcut icon" href="https://i.ibb.co/27sFLpCH/image.png">
 <script>
   tailwind.config = {
     theme: {
@@ -33,6 +32,7 @@
     --line:#E4E4E1;
     --muted:#6B6B70;
     --panel:#F1F0EC;
+    --success:#15803d;
   }
   *{ -webkit-font-smoothing:antialiased; }
   html{ scroll-behavior:smooth; }
@@ -40,6 +40,7 @@
     background:var(--bg);
     color:var(--ink);
     font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
+    line-height:1.6;
   }
   .font-display{ font-family:'Space Grotesk',ui-sans-serif,sans-serif; }
   .font-mono{ font-family:'JetBrains Mono',ui-monospace,monospace; }
@@ -53,6 +54,7 @@
     background:var(--ink);
     color:var(--lime);
     transition: transform .35s cubic-bezier(.19,1,.22,1), background .3s ease;
+    box-shadow: 0 12px 22px rgba(11,11,14,0.12);
   }
   .btn-primary:hover{ background:var(--violet-deep); color:#fff; transform: translateY(-2px); }
   .btn-primary:active{ transform: translateY(0); }
@@ -64,6 +66,14 @@
   }
   .btn-ghost:hover{ background:var(--ink); color:var(--lime); }
 
+  .btn-whatsapp{
+    background:#25D366;
+    color:#fff;
+    transition: transform .35s ease, box-shadow .35s ease;
+    box-shadow: 0 12px 22px rgba(37, 211, 102, 0.25);
+  }
+  .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 16px 28px rgba(37, 211, 102, 0.35); }
+
   .reveal{
     opacity:0;
     transform: translateY(24px);
@@ -71,7 +81,6 @@
   }
   .reveal.is-visible{ opacity:1; transform:translateY(0); }
 
-  /* Build meter — signature element */
   .meter-track{
     position:relative;
     height:6px;
@@ -114,7 +123,7 @@
 
   select.field{
     appearance:none; -webkit-appearance:none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%236B6B70' stroke-[...]
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%236B6B70' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat:no-repeat;
     background-position: right 4px center;
     padding-right:28px;
@@ -125,15 +134,54 @@
   .card-pop{ transition: transform .4s cubic-bezier(.19,1,.22,1), box-shadow .4s ease; }
   .card-pop:hover{ transform: translateY(-6px); box-shadow: 0 24px 48px -20px rgba(11,11,14,0.25); }
 
-  ::selection{ background:var(--lime); color:var(--ink); }
+  .service-card{
+    border:1px solid var(--line);
+    background: rgba(255,255,255,0.55);
+    border-radius: 24px;
+    padding: 1.5rem;
+    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+  }
+  .service-card:hover{ transform: translateY(-3px); border-color: rgba(91,79,224,0.3); box-shadow: 0 18px 30px -24px rgba(11,11,14,0.28); }
+  .service-card .icon {
+    width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgba(91,79,224,0.08); color: var(--violet); font-size: 1.2rem; margin-bottom: 1rem;
+  }
 
-  /* Fluid, clamped headline sizing — safe on narrow viewports, no runaway vw scaling */
+  .trust-list li{ position: relative; padding-left: 1.1rem; }
+  .trust-list li::before{
+    content:'•'; position:absolute; left:0; color:var(--violet); font-weight:700;
+  }
+
+  .cta-banner{
+    border: 1px solid rgba(91,79,224,0.2);
+    background: linear-gradient(135deg, rgba(91,79,224,0.06), rgba(212,255,61,0.12));
+    border-radius: 28px;
+  }
+
+  .mobile-cta {
+    position: fixed;
+    left: 12px; right: 12px; bottom: 14px;
+    z-index: 55;
+    display: none;
+    background: rgba(11, 11, 14, 0.96);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 10px;
+    box-shadow: 0 18px 30px rgba(11,11,14,0.23);
+  }
+  .mobile-cta a { flex:1; }
+
+  ::selection{ background:var(--lime); color:var(--ink); }
   .h1-fluid{ font-size: clamp(2.5rem, 5.6vw + 1.2rem, 5.2rem); }
 
   a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
     outline: 2px solid var(--violet);
     outline-offset: 3px;
     border-radius: 2px;
+  }
+
+  @media (max-width: 767px){
+    .mobile-cta{ display:flex; gap:8px; }
+    body{ padding-bottom: 96px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -160,43 +208,60 @@
 <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-[color:var(--bg)]/80 border-b border-[color:var(--line)]">
   <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
     <a href="#top" class="font-display font-bold text-lg tracking-tight">RetailX<span style="color:var(--violet)">.</span></a>
-    <nav class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest text-[color:var(--muted)]">
-      <a href="#offer" class="hover:text-[color:var(--ink)] transition-colors">Offer</a>
-      <a href="#standard" class="hover:text-[color:var(--ink)] transition-colors">The Standard</a>
+    <nav class="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
+      <a href="#services" class="hover:text-[color:var(--ink)] transition-colors">Services</a>
+      <a href="#standard" class="hover:text-[color:var(--ink)] transition-colors">Why Us</a>
+      <a href="#offer" class="hover:text-[color:var(--ink)] transition-colors">Pricing</a>
       <a href="#intake" class="hover:text-[color:var(--ink)] transition-colors">Start Project</a>
     </nav>
-    <a href="#intake" class="btn-primary font-mono text-xs uppercase tracking-widest px-4 py-2.5 rounded-full">Pre-Order — ₹1599</a>
+    <div class="flex items-center gap-3">
+      <a href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%20want%20a%20website%20for%20my%20business." class="hidden sm:inline-flex btn-whatsapp font-mono text-[10px] uppercase tracking-[0.18em] px-4 py-2.5 rounded-full">WhatsApp</a>
+      <a href="#intake" class="btn-primary font-mono text-[10px] uppercase tracking-[0.18em] px-4 py-2.5 rounded-full">Get a Quote</a>
+    </div>
   </div>
 </header>
 
 <!-- HERO -->
-<section id="top" class="relative pt-32 sm:pt-40 pb-24 sm:pb-28 px-6 noise-line">
+<section id="top" class="relative pt-32 sm:pt-40 pb-20 sm:pb-24 px-6 noise-line">
   <div class="max-w-6xl mx-auto">
-    <div class="flex items-center gap-3 mb-8 font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--muted)]">
+    <div class="flex items-center gap-3 mb-8 font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
       <span class="w-2 h-2 rounded-full" style="background:var(--lime)"></span>
-      Static. Fast. Live in 5 days.
+      Built to convert. Ready in 5 days.
     </div>
 
     <div class="inline-flex items-center gap-2 rounded-full border border-[color:var(--violet)]/30 bg-[color:var(--violet)]/5 px-4 py-2 mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--violet)]">
-      RetailX Website Builder is coming soon
+      Premium websites for service businesses & local brands
     </div>
 
-    <h1 class="h1-fluid font-display font-bold leading-[1.02] tracking-tight max-w-3xl">
-      Your Business, Upgraded. A Premium Static Website <span style="color:var(--violet)">in 5 Days.</span>
+    <h1 class="h1-fluid font-display font-bold leading-[1.02] tracking-tight max-w-4xl">
+      Website design that turns curious visitors into real enquiries.
     </h1>
 
-    <p class="mt-8 text-lg sm:text-xl text-[color:var(--muted)] max-w-xl leading-relaxed">
-      Engineered for speed, designed for impact. Get a bespoke, high-performance website for a flat fee of
-      <span class="font-mono font-medium text-[color:var(--ink)]">₹1599.</span>
+    <p class="mt-8 text-lg sm:text-xl text-[color:var(--muted)] max-w-2xl leading-relaxed">
+      RetailX creates fast, mobile-first business websites that make your offer crystal clear, build trust instantly, and guide customers toward WhatsApp, quote requests, or direct contact.
     </p>
 
     <div class="mt-10 flex flex-wrap items-center gap-4">
-      <a href="#intake" class="btn-primary font-mono text-sm uppercase tracking-widest px-7 py-4 rounded-full">Pre-Order Your Website →</a>
-      <a href="#standard" class="btn-ghost font-mono text-sm uppercase tracking-widest px-7 py-4 rounded-full">See How It Works</a>
+      <a href="#intake" class="btn-primary font-mono text-sm uppercase tracking-widest px-7 py-4 rounded-full">Request My Free Quote</a>
+      <a href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%20want%20to%20discuss%20a%20website%20for%20my%20business." class="btn-whatsapp font-mono text-sm uppercase tracking-widest px-7 py-4 rounded-full">Chat on WhatsApp</a>
     </div>
 
-    <!-- Signature build meter -->
-    <div class="mt-20 max-w-md">
+    <div class="mt-16 grid gap-4 sm:grid-cols-3 max-w-3xl">
+      <div class="reveal card-pop p-5 rounded-2xl border border-[color:var(--line)] bg-white/60">
+        <div class="font-display font-bold text-3xl sm:text-4xl">5 Days</div>
+        <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted)] mt-2">Launch timeline</div>
+      </div>
+      <div class="reveal card-pop p-5 rounded-2xl border border-[color:var(--line)] bg-white/60">
+        <div class="font-display font-bold text-3xl sm:text-4xl">Mobile</div>
+        <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted)] mt-2">First experience</div>
+      </div>
+      <div class="reveal card-pop p-5 rounded-2xl border border-[color:var(--line)] bg-white/60">
+        <div class="font-display font-bold text-3xl sm:text-4xl">Lead</div>
+        <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted)] mt-2">Focused messaging</div>
+      </div>
+    </div>
+
+    <div class="mt-18 max-w-md">
       <div class="flex justify-between font-mono text-[11px] uppercase tracking-widest text-[color:var(--muted)] mb-2">
         <span>Build status</span>
         <span>Day 1 → Day 5</span>
@@ -206,51 +271,132 @@
   </div>
 </section>
 
+<!-- TRUST STRIP -->
+<section class="px-6 pb-8">
+  <div class="max-w-6xl mx-auto border border-[color:var(--line)] rounded-2xl bg-white/60 px-4 py-4 sm:px-6">
+    <div class="grid md:grid-cols-4 gap-4 text-center md:text-left">
+      <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--muted)]">Clean, premium design</div>
+      <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--muted)]">Fast-loading pages</div>
+      <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--muted)]">Clear conversion path</div>
+      <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--muted)]">WhatsApp-ready</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="py-24 px-6 border-t border-[color:var(--line)]">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-14">
+      <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--violet)">What we build</span>
+      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight mt-4 mb-4">Websites designed to generate leads.</h2>
+      <p class="max-w-2xl text-[color:var(--muted)] text-lg">From local service brands to startups, we create websites that explain the offer clearly, build trust quickly, and help visitors take action without friction.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-4 gap-5">
+      <article class="reveal service-card">
+        <div class="icon">✦</div>
+        <h3 class="font-display font-bold text-2xl mb-3">Service Websites</h3>
+        <p class="text-[color:var(--muted)]">Showcase your services, explain the value, and turn visits into quote requests with persuasive messaging.</p>
+      </article>
+      <article class="reveal service-card">
+        <div class="icon">↗</div>
+        <h3 class="font-display font-bold text-2xl mb-3">Landing Pages</h3>
+        <p class="text-[color:var(--muted)]">Focused pages built to capture attention, answer objections, and push visitors to contact or enquire.</p>
+      </article>
+      <article class="reveal service-card">
+        <div class="icon">◎</div>
+        <h3 class="font-display font-bold text-2xl mb-3">Local Business Sites</h3>
+        <p class="text-[color:var(--muted)]">Built for trust, credibility, and easy contact — especially effective for small businesses and retail brands.</p>
+      </article>
+      <article class="reveal service-card">
+        <div class="icon">✓</div>
+        <h3 class="font-display font-bold text-2xl mb-3">Lead Capture Setup</h3>
+        <p class="text-[color:var(--muted)]">Strategic call-to-action placement, WhatsApp buttons, and inquiry flows that make action feel easy.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- VALUE PROP -->
-<section id="standard" class="py-28 px-6 border-t border-[color:var(--line)]">
+<section id="standard" class="py-24 px-6 border-t border-[color:var(--line)] bg-[color:var(--panel)]/40">
   <div class="max-w-6xl mx-auto">
     <div class="reveal flex items-end justify-between flex-wrap gap-6 mb-16">
-      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight">The 2027<br>Standard.</h2>
-      <p class="max-w-sm text-[color:var(--muted)] font-mono text-sm leading-relaxed">
-        No bloated CMS. No plugin debt. Just architecture built for how the web actually gets used in 2027.
+      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight">Why businesses choose RetailX.</h2>
+      <p class="max-w-md text-[color:var(--muted)] font-mono text-sm leading-relaxed">
+        Great websites do more than look premium — they create confidence, reduce friction, and push visitors toward the next step.
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-px bg-[color:var(--line)] border border-[color:var(--line)]">
-      <div class="reveal card-pop bg-[color:var(--bg)] p-10 flex flex-col gap-6">
-        <span class="font-mono text-xs text-[color:var(--muted)]">01 / Mobile-First</span>
-        <h3 class="font-display font-semibold text-2xl leading-snug">Built for the palm of a hand.</h3>
-        <p class="text-[color:var(--muted)] leading-relaxed">Every layout starts at 375px and scales up — because that's where your customers actually are.</p>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="reveal card-pop bg-white p-8 rounded-[28px] border border-[color:var(--line)]">
+        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--violet)] mb-4">Clear offer</div>
+        <h3 class="font-display font-bold text-3xl mb-4">People understand your business in seconds.</h3>
+        <p class="text-[color:var(--muted)]">Visitors should quickly know what you do, who it’s for, and why they should trust you. We design around clarity and confidence.</p>
       </div>
-      <div class="reveal card-pop bg-[color:var(--bg)] p-10 flex flex-col gap-6">
-        <span class="font-mono text-xs text-[color:var(--muted)]">02 / Static-Speed</span>
-        <h3 class="font-display font-semibold text-2xl leading-snug">Loads before they blink.</h3>
-        <p class="text-[color:var(--muted)] leading-relaxed">Zero server round-trips, zero database lag. Pure static architecture built for sub-second loads.</p>
+      <div class="reveal card-pop bg-white p-8 rounded-[28px] border border-[color:var(--line)]">
+        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--violet)] mb-4">Trust building</div>
+        <h3 class="font-display font-bold text-3xl mb-4">Professional design feels credible from the first scroll.</h3>
+        <p class="text-[color:var(--muted)]">Premium layouts, polished copy, strong calls to action, and clear contact options help prospects feel comfortable reaching out.</p>
       </div>
-      <div class="reveal card-pop bg-[color:var(--bg)] p-10 flex flex-col gap-6">
-        <span class="font-mono text-xs text-[color:var(--muted)]">03 / Conversion-Ready</span>
-        <h3 class="font-display font-semibold text-2xl leading-snug">Designed to close, not just look good.</h3>
-        <p class="text-[color:var(--muted)] leading-relaxed">Every section is placed with intent — CTAs, trust signals, and flow tested to turn visits into leads.</p>
+      <div class="reveal card-pop bg-white p-8 rounded-[28px] border border-[color:var(--line)]">
+        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--violet)] mb-4">Easy action</div>
+        <h3 class="font-display font-bold text-3xl mb-4">Every page is built to move people forward.</h3>
+        <p class="text-[color:var(--muted)]">Whether it’s a quote request, a WhatsApp enquiry, or a contact form — each CTA is designed to feel obvious and low-friction.</p>
+      </div>
+      <div class="reveal card-pop bg-white p-8 rounded-[28px] border border-[color:var(--line)]">
+        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--violet)] mb-4">Mobile-first flow</div>
+        <h3 class="font-display font-bold text-3xl mb-4">Your website works beautifully on phones.</h3>
+        <p class="text-[color:var(--muted)]">Most customers discover businesses on mobile. We optimize for speed, readability, and quick contact — wherever they are.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="reveal mb-14">
+      <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--violet)">How it works</span>
+      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight mt-4 mb-4">A simple process that keeps momentum high.</h2>
+    </div>
+    <div class="grid md:grid-cols-4 gap-5">
+      <div class="reveal service-card">
+        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">01</div>
+        <h3 class="font-display font-bold text-2xl mb-3">Tell us your business</h3>
+        <p class="text-[color:var(--muted)]">Share your offer, audience, and the action you want people to take.</p>
+      </div>
+      <div class="reveal service-card">
+        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">02</div>
+        <h3 class="font-display font-bold text-2xl mb-3">We craft your site</h3>
+        <p class="text-[color:var(--muted)]">We map structure, messaging, and visuals for clarity and conversion.</p>
+      </div>
+      <div class="reveal service-card">
+        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">03</div>
+        <h3 class="font-display font-bold text-2xl mb-3">Review and refine</h3>
+        <p class="text-[color:var(--muted)]">You review the site, flag feedback, and we tighten the details.</p>
+      </div>
+      <div class="reveal service-card">
+        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">04</div>
+        <h3 class="font-display font-bold text-2xl mb-3">Launch & convert</h3>
+        <p class="text-[color:var(--muted)]">Your site goes live ready to attract enquiries and enquiries.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- OFFER -->
-<section id="offer" class="py-28 px-6" style="background:var(--ink); color:#fff;">
+<section id="offer" class="py-24 px-6" style="background:var(--ink); color:#fff;">
   <div class="max-w-6xl mx-auto">
     <div class="reveal grid lg:grid-cols-[1fr_auto] gap-16 items-start">
       <div>
         <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--lime)">The Offer</span>
         <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight mt-4 mb-8">
-          One flat fee.<br>Five working days.
+          Premium website packages<br>that are simple, fast, and conversion-ready.
         </h2>
-        <p class="text-white/60 max-w-md leading-relaxed mb-10">
-          A complete, launch-ready static website — copy structure, layout, mobile optimization, and deployment included.
-          Domain registration is billed separately at cost, so you always know exactly what you're paying for.
+        <p class="text-white/70 max-w-xl leading-relaxed mb-10">
+          Starting from just <span class="font-mono font-medium text-white">₹1599</span>, you get a launch-ready website designed to elevate your brand, explain your services clearly, and turn more visitors into enquiries.
         </p>
 
-        <!-- Timeline reusing the meter motif -->
         <div class="flex items-center gap-3 flex-wrap">
           <div class="day-active flex items-center gap-2"><span class="day-dot"></span><span class="font-mono text-xs text-white/70">Day 1 · Brief</span></div>
           <div class="w-8 h-px bg-white/20"></div>
@@ -267,10 +413,10 @@
         <div class="font-display font-bold text-6xl mb-1">₹1599</div>
         <div class="font-mono text-xs text-white/40 mb-8">domain billed separately</div>
         <ul class="space-y-3 text-sm text-white/80 mb-10">
-          <li class="flex gap-2"><span style="color:var(--lime)">—</span> Bespoke static website</li>
-          <li class="flex gap-2"><span style="color:var(--lime)">—</span> 5-day delivery window</li>
-          <li class="flex gap-2"><span style="color:var(--lime)">—</span> Mobile-first, conversion-ready</li>
-          <li class="flex gap-2"><span style="color:var(--lime)">—</span> WhatsApp integration on request</li>
+          <li class="flex gap-2"><span style="color:var(--lime)">—</span> Premium static web design</li>
+          <li class="flex gap-2"><span style="color:var(--lime)">—</span> Fast 5-day delivery</li>
+          <li class="flex gap-2"><span style="color:var(--lime)">—</span> Mobile-first, conversion-led layout</li>
+          <li class="flex gap-2"><span style="color:var(--lime)">—</span> WhatsApp enquiry flow</li>
         </ul>
         <a href="#intake" class="block text-center font-mono text-xs uppercase tracking-widest py-4 rounded-full" style="background:var(--lime); color:var(--ink);">Pre-Order Now</a>
       </div>
@@ -278,13 +424,29 @@
   </div>
 </section>
 
+<!-- CTA STRIP -->
+<section class="py-24 px-6">
+  <div class="max-w-5xl mx-auto cta-banner p-8 sm:p-10 reveal">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--violet)">Ready to grow?</span>
+        <h3 class="font-display font-bold text-3xl sm:text-4xl mt-3">Let’s build a website that brings in more enquiries.</h3>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="#intake" class="btn-primary font-mono text-xs uppercase tracking-[0.2em] px-5 py-3.5 rounded-full">Request a Quote</a>
+        <a href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%20want%20to%20enquire%20about%20a%20website%20for%20my%20business." class="btn-whatsapp font-mono text-xs uppercase tracking-[0.2em] px-5 py-3.5 rounded-full">WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CLIENT INTAKE FORM -->
-<section id="intake" class="py-28 px-6 border-b border-[color:var(--line)]">
+<section id="intake" class="py-24 px-6 border-b border-[color:var(--line)]">
   <div class="max-w-3xl mx-auto">
     <div class="reveal mb-16">
       <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--violet)">Start Your Project</span>
       <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight mt-4 mb-4">Tell us what<br>you're building.</h2>
-      <p class="text-[color:var(--muted)] max-w-lg">Five minutes of your time gets the build started. The more specific you are, the closer day one gets to your finished site.</p>
+      <p class="text-[color:var(--muted)] max-w-lg">A quick project brief helps us shape a website that matches your business, speaks to the right audience, and starts converting visitors into leads.</p>
     </div>
 
     <form id="intake-form" class="reveal space-y-14">
@@ -361,7 +523,7 @@
       <!-- Creative Brief -->
       <fieldset class="space-y-6">
         <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Creative Brief</legend>
-        <textarea name="creative_brief" rows="4" placeholder="Design goals, preferred colors, reference sites you like…" class="field w-full py-2 resize-none"></textarea>
+        <textarea name="creative_brief" rows="4" placeholder="Design goals, preferred colors, reference sites you like, service areas, and your main conversion goal…" class="field w-full py-2 resize-none"></textarea>
       </fieldset>
 
       <button type="submit" class="btn-primary font-mono text-sm uppercase tracking-widest px-8 py-4 rounded-full">Submit Project Brief →</button>
@@ -381,7 +543,7 @@
     </div>
     <h3 class="font-display font-bold text-2xl mb-3">Thanks for choosing us!</h3>
     <p class="text-white/70 text-sm mb-8">Your project brief was sent on WhatsApp. Complete your pre-order with the payment link below to lock in your build slot.</p>
-    <a href="https://razorpay.com/payment-link/plink_TIvxE12DZ3a2us" target="_blank" rel="noopener" class="block text-center font-mono text-xs uppercase tracking-widest py-4 rounded-full mb-3" style="background:var(--lime); color:var(--ink);">Pay to Reserve Your Slot</a>
+    <a href="https://razorpay.com/payment-link/plink_TIvxE12DZ3a2us" target="_blank" rel="noopener" class="block text-center font-mono text-xs uppercase tracking-widest py-4 rounded-full mb-3" style="background:var(--lime); color:var(--ink);">Pay to Confirm</a>
     <button id="success-close" type="button" class="w-full text-center font-mono text-xs uppercase tracking-widest py-3 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-white/40 transition-colors">Close</button>
   </div>
 </div>
@@ -391,7 +553,7 @@
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-10">
     <div>
       <div class="font-display font-bold text-2xl tracking-tight mb-3">RetailX<span style="color:var(--violet)">.</span></div>
-      <p class="text-[color:var(--muted)] text-sm max-w-xs">Premium static websites, delivered in 5 days flat.</p>
+      <p class="text-[color:var(--muted)] text-sm max-w-xs">Premium websites that help businesses look credible, convert better, and win more enquiries.</p>
     </div>
     <div class="flex flex-col gap-2 font-mono text-sm">
       <span class="text-[color:var(--muted)] text-xs uppercase tracking-widest mb-1">Contact</span>
@@ -404,6 +566,11 @@
     © 2026 RetailX. All rights reserved.
   </div>
 </footer>
+
+<div class="mobile-cta">
+  <a href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%20want%20a%20website%20quote." class="btn-whatsapp font-mono text-[10px] uppercase tracking-[0.18em] px-4 py-3 rounded-full text-center">WhatsApp</a>
+  <a href="#intake" class="btn-primary font-mono text-[10px] uppercase tracking-[0.18em] px-4 py-3 rounded-full text-center">Get Quote</a>
+</div>
 
 <script>
   // Scroll reveal
@@ -643,7 +810,7 @@ Powered by Widgetify
 <div class="widgetify-toggle" id="widgetifyToggle">
 
 <svg width="30" height="30" viewBox="0 0 32 32" fill="currentColor">
-<path d="M19.11 17.21c-.29-.15-1.71-.84-1.98-.94-.27-.1-.46-.15-.66.15-.19.29-.76.94-.93 1.13-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.13-.1.34-.22.63-.22.3 0 .69.17.95.42.11.1.24.26.39.56.17.34.43.84.52 1.08.1.25.06.48-.06.64-.12.17-.26.27-.47.47-.15.15-.28.32-.41.37-.13.05-.22.06-.39-.02-.17-.08-1.01-.5-1.92-1.16-.91-.66-1.53-1.48-1.68-1.73-.15-.25-.14-.39-.06-.62.08-.22.36-.57.68-.88.2-.2.44-.46.62-.7.18-.23.23-.43.36-.72.14-.31.07-.57-.09-.82-.18-.28-.82-1.89-1.09-2.53-.27-.64-.55-.57-.82-.57h-.7c-.24 0-.64.09-.98.45-.34.35-1.3 1.27-1.3 3.09s1.32 3.58 1.51 3.83c.19.25 2.62 4.02 6.33 5.38.93.4 1.59.63 2.13.81.95.3 1.81.26 2.49.16.76-.11 2.36-.96 2.69-1.88.32-.92.32-1.71.22-1.87-.1-.16-.36-.25-.76-.44z"/>
+<path d="M19.11 17.21c-.29-.15-1.71-.84-1.98-.94-.27-.1-.46-.15-.66.15-.19.29-.76.94-.93 1.13-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.5.15-.17.17-.29.28-.48.1-.2.05-.37-.02-.52-.08-.15-.6-1.44-.82-1.97-.22-.53-.45-.46-.63-.46h-.55c-.19 0-.5.07-.76.34-.26.27-1 .98-1 2.39 0 1.4 1.03 2.77 1.17 2.96.15.19 2 3.17 4.84 4.45.68.29 1.21.47 1.62.6.68.22 1.3.19 1.8.12.55-.08 1.69-.69 1.93-1.36.24-.67.24-1.24.17-1.36-.06-.12-.23-.2-.5-.35z"/>
 <path d="M16 3C8.82 3 3 8.82 3 16c0 2.53.74 4.99 2.13 7.09L3 29l6.1-2.08A12.9 12.9 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3z"/>
 </svg>
 
