@@ -1,842 +1,212 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-IN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RetailX — Websites That Turn Visitors Into Leads</title>
-<meta name="description" content="RetailX builds conversion-focused business websites with clear calls to action, mobile-first design, and WhatsApp-ready lead generation for service businesses." />
-<link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/27sFLpCH/image.png"><link rel="apple-touch-icon" href="https://i.ibb.co/27sFLpCH/image.png"><link rel="shortcut icon" href="https://i.ibb.co/27sFLpCH/image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          display: ['Space Grotesk', 'sans-serif'],
-          mono: ['JetBrains Mono', 'monospace'],
-        }
-      }
-    }
-  }
-</script>
-<style>
-  :root{
-    --bg:#FAFAF9;
-    --ink:#0B0B0E;
-    --violet:#5B4FE0;
-    --violet-deep:#453BC2;
-    --lime:#D4FF3D;
-    --line:#E4E4E1;
-    --muted:#6B6B70;
-    --panel:#F1F0EC;
-    --success:#15803d;
-  }
-  *{ -webkit-font-smoothing:antialiased; }
-  html{ scroll-behavior:smooth; }
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter',ui-sans-serif,system-ui,sans-serif;
-    line-height:1.6;
-  }
-  .font-display{ font-family:'Space Grotesk',ui-sans-serif,sans-serif; }
-  .font-mono{ font-family:'JetBrains Mono',ui-monospace,monospace; }
-
-  .noise-line{
-    background-image: linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 48px 100%;
-  }
-
-  .btn-primary{
-    background:var(--ink);
-    color:var(--lime);
-    transition: transform .35s cubic-bezier(.19,1,.22,1), background .3s ease;
-    box-shadow: 0 12px 22px rgba(11,11,14,0.12);
-  }
-  .btn-primary:hover{ background:var(--violet-deep); color:#fff; transform: translateY(-2px); }
-  .btn-primary:active{ transform: translateY(0); }
-
-  .btn-ghost{
-    border:1px solid var(--ink);
-    color:var(--ink);
-    transition: background .3s ease, color .3s ease;
-  }
-  .btn-ghost:hover{ background:var(--ink); color:var(--lime); }
-
-  .btn-whatsapp{
-    background:#25D366;
-    color:#fff;
-    transition: transform .35s ease, box-shadow .35s ease;
-    box-shadow: 0 12px 22px rgba(37, 211, 102, 0.25);
-  }
-  .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 16px 28px rgba(37, 211, 102, 0.35); }
-
-  .reveal{
-    opacity:0;
-    transform: translateY(24px);
-    transition: opacity .8s cubic-bezier(.19,1,.22,1), transform .8s cubic-bezier(.19,1,.22,1);
-  }
-  .reveal.is-visible{ opacity:1; transform:translateY(0); }
-
-  .meter-track{
-    position:relative;
-    height:6px;
-    background: var(--line);
-    border-radius:999px;
-    overflow:hidden;
-  }
-  .meter-fill{
-    position:absolute; inset:0 auto 0 0;
-    width:0%;
-    background: linear-gradient(90deg, var(--violet), var(--lime));
-    border-radius:999px;
-    animation: fillMeter 4s cubic-bezier(.65,0,.35,1) infinite;
-  }
-  @keyframes fillMeter{
-    0%{ width:2%; }
-    45%{ width:100%; }
-    65%{ width:100%; }
-    66%{ width:2%; opacity:0; }
-    67%{ opacity:1; }
-    100%{ width:2%; }
-  }
-
-  .day-dot{
-    width:10px; height:10px; border-radius:999px;
-    background:var(--line);
-    transition: background .3s ease;
-  }
-  .day-active .day-dot{ background:var(--violet); }
-  .day-active .day-dot.lime{ background:var(--lime); }
-
-  .field{
-    background:transparent;
-    border:0;
-    border-bottom:1.5px solid var(--line);
-    transition: border-color .25s ease;
-  }
-  .field:focus{ outline:none; border-color:var(--violet); }
-  .field::placeholder{ color:#A8A8AC; }
-
-  select.field{
-    appearance:none; -webkit-appearance:none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none'%3E%3Cpath d='M1 1L7 7L13 1' stroke='%236B6B70' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;
-    background-position: right 4px center;
-    padding-right:28px;
-  }
-  select.field option{ color:var(--ink); }
-  select.field:invalid{ color:#A8A8AC; }
-
-  .card-pop{ transition: transform .4s cubic-bezier(.19,1,.22,1), box-shadow .4s ease; }
-  .card-pop:hover{ transform: translateY(-6px); box-shadow: 0 24px 48px -20px rgba(11,11,14,0.25); }
-
-  .service-card{
-    border:1px solid var(--line);
-    background: rgba(255,255,255,0.55);
-    border-radius: 24px;
-    padding: 1.5rem;
-    transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
-  }
-  .service-card:hover{ transform: translateY(-3px); border-color: rgba(91,79,224,0.3); box-shadow: 0 18px 30px -24px rgba(11,11,14,0.28); }
-  .service-card .icon {
-    width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgba(91,79,224,0.08); color: var(--violet); font-size: 1.2rem; margin-bottom: 1rem;
-  }
-
-  .trust-list li{ position: relative; padding-left: 1.1rem; }
-  .trust-list li::before{
-    content:'•'; position:absolute; left:0; color:var(--violet); font-weight:700;
-  }
-
-  .cta-banner{
-    border: 1px solid rgba(91,79,224,0.2);
-    background: linear-gradient(135deg, rgba(91,79,224,0.06), rgba(212,255,61,0.12));
-    border-radius: 28px;
-  }
-
-  .mobile-cta {
-    position: fixed;
-    left: 12px; right: 12px; bottom: 14px;
-    z-index: 55;
-    display: none;
-    background: rgba(11, 11, 14, 0.96);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px;
-    padding: 10px;
-    box-shadow: 0 18px 30px rgba(11,11,14,0.23);
-  }
-  .mobile-cta a { flex:1; }
-
-  ::selection{ background:var(--lime); color:var(--ink); }
-  .h1-fluid{ font-size: clamp(2.5rem, 5.6vw + 1.2rem, 5.2rem); }
-
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
-    outline: 2px solid var(--violet);
-    outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  @media (max-width: 767px){
-    .mobile-cta{ display:flex; gap:8px; }
-    body{ padding-bottom: 96px; }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .reveal{ transition:none; opacity:1; transform:none; }
-    .meter-fill{ animation:none; width:60%; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FAFAF9">
+  <meta name="author" content="RetailX">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <title>RetailX | Conversion-focused websites for Indian businesses</title>
+  <meta name="description" content="RetailX builds mobile-first business websites, landing pages and WhatsApp enquiry flows. Clear scope, ₹1,599 starting price and a five-working-day process.">
+  <link rel="canonical" href="https://retailx.site/">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://i.ibb.co/27sFLpCH/image.png">
+  <link rel="apple-touch-icon" href="https://i.ibb.co/27sFLpCH/image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="RetailX">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:title" content="RetailX | Conversion-focused websites for Indian businesses">
+  <meta property="og:description" content="Mobile-first websites and clear enquiry journeys for small businesses, service providers and retail brands.">
+  <meta property="og:url" content="https://retailx.site/">
+  <meta property="og:image" content="https://i.ibb.co/27sFLpCH/image.png">
+  <meta property="og:image:alt" content="RetailX — conversion-focused website design">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RetailX | Websites built to turn visits into enquiries">
+  <meta name="twitter:description" content="Mobile-first websites and WhatsApp-ready enquiries for Indian businesses. Packages from ₹1,599; domain billed separately.">
+  <meta name="twitter:image" content="https://i.ibb.co/27sFLpCH/image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="alternate" type="text/plain" href="/llms.txt">
-  <link rel="alternate" type="text/plain" href="/llms-full.txt">
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P5Y8HJQ04B"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-P5Y8HJQ04B');
-</script>
-
-<body class="antialiased">
-
-<!-- NAV -->
-<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-[color:var(--bg)]/80 border-b border-[color:var(--line)]">
-  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href="#top" class="font-display font-bold text-lg tracking-tight">RetailX<span style="color:var(--violet)">.</span></a>
-    <nav class="hidden md:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
-      <a href="#services" class="hover:text-[color:var(--ink)] transition-colors">Services</a>
-      <a href="#standard" class="hover:text-[color:var(--ink)] transition-colors">Why Us</a>
-      <a href="#offer" class="hover:text-[color:var(--ink)] transition-colors">Pricing</a>
-      <a href="#intake" class="hover:text-[color:var(--ink)] transition-colors">Start Project</a>
-    </nav>
-    <div class="flex items-center gap-3">
-      <a href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%20want%20a%20website%20for%20my%20business." class="hidden sm:inline-flex btn-whatsapp font-mono text-[10px] uppercase tracking-[0.18em] px-4 py-2.5 rounded-full">WhatsApp</a>
-      <a href="#intake" class="btn-primary font-mono text-[10px] uppercase tracking-[0.18em] px-4 py-2.5 rounded-full">Get a Quote</a>
-    </div>
-  </div>
-</header>
-
-<!-- HERO -->
-<section id="top" class="relative pt-32 sm:pt-40 pb-20 sm:pb-24 px-6 noise-line">
-  <div class="max-w-6xl mx-auto">
-    <div class="flex items-center gap-3 mb-8 font-mono text-[11px] uppercase tracking-[0.2em] text-[color:var(--muted)]">
-      <span class="w-2 h-2 rounded-full" style="background:var(--lime)"></span>
-      Built to convert. Ready in 5 days.
-    </div>
-
-    <div class="inline-flex items-center gap-2 rounded-full border border-[color:var(--violet)]/30 bg-[color:var(--violet)]/5 px-4 py-2 mb-6 font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--violet)]">
-      Premium websites for service businesses & local brands
-    </div>
-
-    <h1 class="h1-fluid font-display font-bold leading-[1.02] tracking-tight max-w-4xl">
-      Website design that turns curious visitors into real enquiries.
-    </h1>
-
-    <p class="mt-8 text-lg sm:text-xl text-[color:var(--muted)] max-w-2xl leading-relaxed">
-      RetailX creates fast, mobile-first business websites that make your offer crystal clear, build trust instantly, and guide customers toward WhatsApp, quote requests, or direct contact.
-    </p>
-
-    <div class="mt-10 flex flex-wrap items-center gap-4">
-      <a href="#intake" class="btn-primary font-mono text-sm uppercase tracking-widest px-7 py-4 rounded-full">Request My Free Quote</a>
-      <a href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%20want%20to%20discuss%20a%20website%20for%20my%20business." class="btn-whatsapp font-mono text-sm uppercase tracking-widest px-7 py-4 rounded-full">Chat on WhatsApp</a>
-    </div>
-
-    <div class="mt-16 grid gap-4 sm:grid-cols-3 max-w-3xl">
-      <div class="reveal card-pop p-5 rounded-2xl border border-[color:var(--line)] bg-white/60">
-        <div class="font-display font-bold text-3xl sm:text-4xl">5 Days</div>
-        <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted)] mt-2">Launch timeline</div>
-      </div>
-      <div class="reveal card-pop p-5 rounded-2xl border border-[color:var(--line)] bg-white/60">
-        <div class="font-display font-bold text-3xl sm:text-4xl">Mobile</div>
-        <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted)] mt-2">First experience</div>
-      </div>
-      <div class="reveal card-pop p-5 rounded-2xl border border-[color:var(--line)] bg-white/60">
-        <div class="font-display font-bold text-3xl sm:text-4xl">Lead</div>
-        <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-[color:var(--muted)] mt-2">Focused messaging</div>
-      </div>
-    </div>
-
-    <div class="mt-18 max-w-md">
-      <div class="flex justify-between font-mono text-[11px] uppercase tracking-widest text-[color:var(--muted)] mb-2">
-        <span>Build status</span>
-        <span>Day 1 → Day 5</span>
-      </div>
-      <div class="meter-track"><div class="meter-fill"></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- TRUST STRIP -->
-<section class="px-6 pb-8">
-  <div class="max-w-6xl mx-auto border border-[color:var(--line)] rounded-2xl bg-white/60 px-4 py-4 sm:px-6">
-    <div class="grid md:grid-cols-4 gap-4 text-center md:text-left">
-      <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--muted)]">Clean, premium design</div>
-      <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--muted)]">Fast-loading pages</div>
-      <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--muted)]">Clear conversion path</div>
-      <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-[color:var(--muted)]">WhatsApp-ready</div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="py-24 px-6 border-t border-[color:var(--line)]">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal mb-14">
-      <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--violet)">What we build</span>
-      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight mt-4 mb-4">Websites designed to generate leads.</h2>
-      <p class="max-w-2xl text-[color:var(--muted)] text-lg">From local service brands to startups, we create websites that explain the offer clearly, build trust quickly, and help visitors take action without friction.</p>
-    </div>
-
-    <div class="grid lg:grid-cols-4 gap-5">
-      <article class="reveal service-card">
-        <div class="icon">✦</div>
-        <h3 class="font-display font-bold text-2xl mb-3">Service Websites</h3>
-        <p class="text-[color:var(--muted)]">Showcase your services, explain the value, and turn visits into quote requests with persuasive messaging.</p>
-      </article>
-      <article class="reveal service-card">
-        <div class="icon">↗</div>
-        <h3 class="font-display font-bold text-2xl mb-3">Landing Pages</h3>
-        <p class="text-[color:var(--muted)]">Focused pages built to capture attention, answer objections, and push visitors to contact or enquire.</p>
-      </article>
-      <article class="reveal service-card">
-        <div class="icon">◎</div>
-        <h3 class="font-display font-bold text-2xl mb-3">Local Business Sites</h3>
-        <p class="text-[color:var(--muted)]">Built for trust, credibility, and easy contact — especially effective for small businesses and retail brands.</p>
-      </article>
-      <article class="reveal service-card">
-        <div class="icon">✓</div>
-        <h3 class="font-display font-bold text-2xl mb-3">Lead Capture Setup</h3>
-        <p class="text-[color:var(--muted)]">Strategic call-to-action placement, WhatsApp buttons, and inquiry flows that make action feel easy.</p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- VALUE PROP -->
-<section id="standard" class="py-24 px-6 border-t border-[color:var(--line)] bg-[color:var(--panel)]/40">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal flex items-end justify-between flex-wrap gap-6 mb-16">
-      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight">Why businesses choose RetailX.</h2>
-      <p class="max-w-md text-[color:var(--muted)] font-mono text-sm leading-relaxed">
-        Great websites do more than look premium — they create confidence, reduce friction, and push visitors toward the next step.
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="reveal card-pop bg-white p-8 rounded-[28px] border border-[color:var(--line)]">
-        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--violet)] mb-4">Clear offer</div>
-        <h3 class="font-display font-bold text-3xl mb-4">People understand your business in seconds.</h3>
-        <p class="text-[color:var(--muted)]">Visitors should quickly know what you do, who it’s for, and why they should trust you. We design around clarity and confidence.</p>
-      </div>
-      <div class="reveal card-pop bg-white p-8 rounded-[28px] border border-[color:var(--line)]">
-        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--violet)] mb-4">Trust building</div>
-        <h3 class="font-display font-bold text-3xl mb-4">Professional design feels credible from the first scroll.</h3>
-        <p class="text-[color:var(--muted)]">Premium layouts, polished copy, strong calls to action, and clear contact options help prospects feel comfortable reaching out.</p>
-      </div>
-      <div class="reveal card-pop bg-white p-8 rounded-[28px] border border-[color:var(--line)]">
-        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--violet)] mb-4">Easy action</div>
-        <h3 class="font-display font-bold text-3xl mb-4">Every page is built to move people forward.</h3>
-        <p class="text-[color:var(--muted)]">Whether it’s a quote request, a WhatsApp enquiry, or a contact form — each CTA is designed to feel obvious and low-friction.</p>
-      </div>
-      <div class="reveal card-pop bg-white p-8 rounded-[28px] border border-[color:var(--line)]">
-        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--violet)] mb-4">Mobile-first flow</div>
-        <h3 class="font-display font-bold text-3xl mb-4">Your website works beautifully on phones.</h3>
-        <p class="text-[color:var(--muted)]">Most customers discover businesses on mobile. We optimize for speed, readability, and quick contact — wherever they are.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="py-24 px-6">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal mb-14">
-      <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--violet)">How it works</span>
-      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight mt-4 mb-4">A simple process that keeps momentum high.</h2>
-    </div>
-    <div class="grid md:grid-cols-4 gap-5">
-      <div class="reveal service-card">
-        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">01</div>
-        <h3 class="font-display font-bold text-2xl mb-3">Tell us your business</h3>
-        <p class="text-[color:var(--muted)]">Share your offer, audience, and the action you want people to take.</p>
-      </div>
-      <div class="reveal service-card">
-        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">02</div>
-        <h3 class="font-display font-bold text-2xl mb-3">We craft your site</h3>
-        <p class="text-[color:var(--muted)]">We map structure, messaging, and visuals for clarity and conversion.</p>
-      </div>
-      <div class="reveal service-card">
-        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">03</div>
-        <h3 class="font-display font-bold text-2xl mb-3">Review and refine</h3>
-        <p class="text-[color:var(--muted)]">You review the site, flag feedback, and we tighten the details.</p>
-      </div>
-      <div class="reveal service-card">
-        <div class="font-mono text-xs uppercase tracking-[0.2em] text-[color:var(--muted)] mb-4">04</div>
-        <h3 class="font-display font-bold text-2xl mb-3">Launch & convert</h3>
-        <p class="text-[color:var(--muted)]">Your site goes live ready to attract enquiries and enquiries.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- OFFER -->
-<section id="offer" class="py-24 px-6" style="background:var(--ink); color:#fff;">
-  <div class="max-w-6xl mx-auto">
-    <div class="reveal grid lg:grid-cols-[1fr_auto] gap-16 items-start">
-      <div>
-        <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--lime)">The Offer</span>
-        <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight mt-4 mb-8">
-          Premium website packages<br>that are simple, fast, and conversion-ready.
-        </h2>
-        <p class="text-white/70 max-w-xl leading-relaxed mb-10">
-          Starting from just <span class="font-mono font-medium text-white">₹1599</span>, you get a launch-ready website designed to elevate your brand, explain your services clearly, and turn more visitors into enquiries.
-        </p>
-
-        <div class="flex items-center gap-3 flex-wrap">
-          <div class="day-active flex items-center gap-2"><span class="day-dot"></span><span class="font-mono text-xs text-white/70">Day 1 · Brief</span></div>
-          <div class="w-8 h-px bg-white/20"></div>
-          <div class="day-active flex items-center gap-2"><span class="day-dot"></span><span class="font-mono text-xs text-white/70">Day 2–3 · Build</span></div>
-          <div class="w-8 h-px bg-white/20"></div>
-          <div class="day-active flex items-center gap-2"><span class="day-dot lime"></span><span class="font-mono text-xs text-white/70">Day 4 · Review</span></div>
-          <div class="w-8 h-px bg-white/20"></div>
-          <div class="day-active flex items-center gap-2"><span class="day-dot lime"></span><span class="font-mono text-xs text-white">Day 5 · Launch</span></div>
-        </div>
-      </div>
-
-      <div class="card-pop border border-white/15 rounded-2xl p-10 w-full lg:w-80 shrink-0" style="background:#111114;">
-        <div class="font-mono text-xs uppercase tracking-widest text-white/40 mb-3">Flat fee</div>
-        <div class="font-display font-bold text-6xl mb-1">₹1599</div>
-        <div class="font-mono text-xs text-white/40 mb-8">domain billed separately</div>
-        <ul class="space-y-3 text-sm text-white/80 mb-10">
-          <li class="flex gap-2"><span style="color:var(--lime)">—</span> Premium static web design</li>
-          <li class="flex gap-2"><span style="color:var(--lime)">—</span> Fast 5-day delivery</li>
-          <li class="flex gap-2"><span style="color:var(--lime)">—</span> Mobile-first, conversion-led layout</li>
-          <li class="flex gap-2"><span style="color:var(--lime)">—</span> WhatsApp enquiry flow</li>
-        </ul>
-        <a href="#intake" class="block text-center font-mono text-xs uppercase tracking-widest py-4 rounded-full" style="background:var(--lime); color:var(--ink);">Pre-Order Now</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA STRIP -->
-<section class="py-24 px-6">
-  <div class="max-w-5xl mx-auto cta-banner p-8 sm:p-10 reveal">
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-      <div>
-        <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--violet)">Ready to grow?</span>
-        <h3 class="font-display font-bold text-3xl sm:text-4xl mt-3">Let’s build a website that brings in more enquiries.</h3>
-      </div>
-      <div class="flex flex-wrap gap-3">
-        <a href="#intake" class="btn-primary font-mono text-xs uppercase tracking-[0.2em] px-5 py-3.5 rounded-full">Request a Quote</a>
-        <a href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%20want%20to%20enquire%20about%20a%20website%20for%20my%20business." class="btn-whatsapp font-mono text-xs uppercase tracking-[0.2em] px-5 py-3.5 rounded-full">WhatsApp Us</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CLIENT INTAKE FORM -->
-<section id="intake" class="py-24 px-6 border-b border-[color:var(--line)]">
-  <div class="max-w-3xl mx-auto">
-    <div class="reveal mb-16">
-      <span class="font-mono text-xs uppercase tracking-[0.2em]" style="color:var(--violet)">Start Your Project</span>
-      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight mt-4 mb-4">Tell us what<br>you're building.</h2>
-      <p class="text-[color:var(--muted)] max-w-lg">A quick project brief helps us shape a website that matches your business, speaks to the right audience, and starts converting visitors into leads.</p>
-    </div>
-
-    <form id="intake-form" class="reveal space-y-14">
-
-      <!-- Basic Info -->
-      <fieldset class="space-y-6">
-        <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Basic Info</legend>
-        <div class="grid sm:grid-cols-2 gap-8">
-          <div>
-            <label class="block font-mono text-xs text-[color:var(--muted)] mb-2">Full Name</label>
-            <input required type="text" name="full_name" placeholder="Aisha Verma" class="field w-full py-2 text-lg">
-          </div>
-          <div>
-            <label class="block font-mono text-xs text-[color:var(--muted)] mb-2">Business Name</label>
-            <input required type="text" name="business_name" placeholder="Verma Textiles Co." class="field w-full py-2 text-lg">
-          </div>
-          <div>
-            <label class="block font-mono text-xs text-[color:var(--muted)] mb-2">Phone Number</label>
-            <input required type="tel" name="phone" placeholder="+91 98765 43210" class="field w-full py-2 text-lg">
-          </div>
-          <div>
-            <label class="block font-mono text-xs text-[color:var(--muted)] mb-2">Email</label>
-            <input required type="email" name="email" placeholder="you@business.com" class="field w-full py-2 text-lg">
-          </div>
-        </div>
-      </fieldset>
-
-      <!-- Project Assets -->
-      <fieldset class="space-y-6">
-        <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Project Assets</legend>
-        <div>
-          <label class="block font-mono text-xs text-[color:var(--muted)] mb-2">Drive / Dropbox / WeTransfer Link</label>
-          <input type="url" name="asset_link" placeholder="Link to your logo, brand imagery, and videos" class="field w-full py-2 text-lg">
-          <p class="mt-2 text-xs text-[color:var(--muted)]">No assets yet? Leave this blank — we'll follow up.</p>
-        </div>
-      </fieldset>
-
-      <!-- Functional Requirements -->
-      <fieldset class="space-y-6">
-        <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Functional Requirements</legend>
-        <div class="grid sm:grid-cols-3 gap-3">
-          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
-            <input type="checkbox" name="sections" value="Hero" class="accent-[color:var(--violet)]"> <span class="text-sm">Hero</span>
-          </label>
-          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
-            <input type="checkbox" name="sections" value="About" class="accent-[color:var(--violet)]"> <span class="text-sm">About</span>
-          </label>
-          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
-            <input type="checkbox" name="sections" value="Services" class="accent-[color:var(--violet)]"> <span class="text-sm">Services</span>
-          </label>
-          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
-            <input type="checkbox" name="sections" value="Contact" class="accent-[color:var(--violet)]"> <span class="text-sm">Contact</span>
-          </label>
-          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
-            <input type="checkbox" name="sections" value="WhatsApp Integration" class="accent-[color:var(--violet)]"> <span class="text-sm">WhatsApp</span>
-          </label>
-          <label class="flex items-center gap-3 border border-[color:var(--line)] rounded-lg px-4 py-3 cursor-pointer hover:border-[color:var(--violet)] transition-colors">
-            <input type="checkbox" name="sections" value="Gallery" class="accent-[color:var(--violet)]"> <span class="text-sm">Gallery</span>
-          </label>
-        </div>
-        <textarea name="other_sections" rows="2" placeholder="Anything else? Testimonials, pricing table, booking form…" class="field w-full py-2 resize-none"></textarea>
-      </fieldset>
-
-      <!-- Domain Strategy -->
-      <fieldset class="space-y-6">
-        <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Domain Strategy</legend>
-        <select name="domain_strategy" class="field w-full py-2 text-lg">
-          <option value="">Select an option</option>
-          <option value="custom">Custom Domain (Paid, billed separately)</option>
-          <option value="subdomain">Free RetailX Subdomain</option>
-        </select>
-      </fieldset>
-
-      <!-- Creative Brief -->
-      <fieldset class="space-y-6">
-        <legend class="font-mono text-xs uppercase tracking-widest text-[color:var(--muted)] mb-4">Creative Brief</legend>
-        <textarea name="creative_brief" rows="4" placeholder="Design goals, preferred colors, reference sites you like, service areas, and your main conversion goal…" class="field w-full py-2 resize-none"></textarea>
-      </fieldset>
-
-      <button type="submit" class="btn-primary font-mono text-sm uppercase tracking-widest px-8 py-4 rounded-full">Submit Project Brief →</button>
-      <p id="form-note" class="font-mono text-xs text-[color:var(--muted)]">We'll open WhatsApp with your brief pre-filled — hit send there to confirm.</p>
-    </form>
-  </div>
-</section>
-
-<!-- SUCCESS MODAL -->
-<div id="success-modal" class="fixed inset-0 z-[100] hidden items-center justify-center px-6" aria-hidden="true">
-  <div id="success-backdrop" class="absolute inset-0 bg-[color:var(--ink)]/70 backdrop-blur-sm"></div>
-  <div class="relative w-full max-w-md rounded-2xl p-8 sm:p-10 text-center card-pop" style="background:#111114; color:#fff;">
-    <div class="mx-auto mb-6 w-14 h-14 rounded-full flex items-center justify-center" style="background:var(--lime);">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M5 13l4 4L19 7" stroke="#0B0B0E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <h3 class="font-display font-bold text-2xl mb-3">Thanks for choosing us!</h3>
-    <p class="text-white/70 text-sm mb-8">Your project brief was sent on WhatsApp. Complete your pre-order with the payment link below to lock in your build slot.</p>
-    <a href="https://razorpay.com/payment-link/plink_TIvxE12DZ3a2us" target="_blank" rel="noopener" class="block text-center font-mono text-xs uppercase tracking-widest py-4 rounded-full mb-3" style="background:var(--lime); color:var(--ink);">Pay to Confirm</a>
-    <button id="success-close" type="button" class="w-full text-center font-mono text-xs uppercase tracking-widest py-3 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-white/40 transition-colors">Close</button>
-  </div>
-</div>
-
-<!-- FOOTER -->
-<footer class="py-16 px-6">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between gap-10">
-    <div>
-      <div class="font-display font-bold text-2xl tracking-tight mb-3">RetailX<span style="color:var(--violet)">.</span></div>
-      <p class="text-[color:var(--muted)] text-sm max-w-xs">Premium websites that help businesses look credible, convert better, and win more enquiries.</p>
-    </div>
-    <div class="flex flex-col gap-2 font-mono text-sm">
-      <span class="text-[color:var(--muted)] text-xs uppercase tracking-widest mb-1">Contact</span>
-      <a href="https://instagram.com/retailx.site" class="hover:text-[color:var(--violet)] transition-colors">Instagram — @retailx.site</a>
-      <a href="mailto:adwebcomicllp@gmail.com" class="hover:text-[color:var(--violet)] transition-colors">adwebcomicllp@gmail.com</a>
-      <a href="https://wa.me/919656778508" class="hover:text-[color:var(--violet)] transition-colors">+91 96567 78508</a>
-    </div>
-  </div>
-  <div class="max-w-6xl mx-auto mt-14 pt-6 border-t border-[color:var(--line)] text-xs font-mono text-[color:var(--muted)]">
-    © 2026 RetailX. All rights reserved.
-  </div>
-</footer>
-
-<div class="mobile-cta">
-  <a href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%20want%20a%20website%20quote." class="btn-whatsapp font-mono text-[10px] uppercase tracking-[0.18em] px-4 py-3 rounded-full text-center">WhatsApp</a>
-  <a href="#intake" class="btn-primary font-mono text-[10px] uppercase tracking-[0.18em] px-4 py-3 rounded-full text-center">Get Quote</a>
-</div>
-
-<script>
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // Intake form handling — packages the brief into a WhatsApp message, then shows the payment popup.
-  const form = document.getElementById('intake-form');
-  const note = document.getElementById('form-note');
-  const WHATSAPP_NUMBER = '919656778508'; // +91 9656778508
-
-  const modal = document.getElementById('success-modal');
-  const backdrop = document.getElementById('success-backdrop');
-  const closeBtn = document.getElementById('success-close');
-
-  function openModal(){
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {"@type":"Organization","@id":"https://retailx.site/#organization","name":"RetailX","url":"https://retailx.site/","logo":"https://i.ibb.co/27sFLpCH/image.png","email":"adwebcomicllp@gmail.com","telephone":"+91-96567-78508","sameAs":["https://instagram.com/retailx.site","https://wa.me/919656778508"]},
+      {"@type":"WebSite","@id":"https://retailx.site/#website","url":"https://retailx.site/","name":"RetailX","publisher":{"@id":"https://retailx.site/#organization"},"inLanguage":"en-IN"},
+      {"@type":"ProfessionalService","@id":"https://retailx.site/#service","name":"RetailX Website Design","url":"https://retailx.site/","provider":{"@id":"https://retailx.site/#organization"},"areaServed":{"@type":"Country","name":"India"},"serviceType":["Business website design","Landing page design","Mobile-first static website development","WhatsApp enquiry setup"],"priceRange":"₹1,599+","description":"Mobile-first static websites and enquiry-focused landing pages for small businesses, local brands, startups and service providers in India. Custom domain registration is billed separately."},
+      {"@type":"FAQPage","@id":"https://retailx.site/#faq","mainEntity":[
+        {"@type":"Question","name":"What does the ₹1,599 starting price include?","acceptedAnswer":{"@type":"Answer","text":"The published starting package covers a premium static website design, a mobile-first layout, a WhatsApp enquiry flow and deployment support. Scope is confirmed before work begins; domain registration is billed separately."}},
+        {"@type":"Question","name":"How long does a website take?","acceptedAnswer":{"@type":"Answer","text":"RetailX describes a five-working-day process: brief and onboarding, build, review and launch. Timing depends on receiving the required content and feedback."}},
+        {"@type":"Question","name":"Do you build websites for local businesses and service providers?","acceptedAnswer":{"@type":"Answer","text":"Yes. RetailX works with small businesses, retail brands, startups, entrepreneurs and service providers that need a clear mobile-first web presence and an easy enquiry path."}},
+        {"@type":"Question","name":"How do I ask for a quote or website review?","acceptedAnswer":{"@type":"Answer","text":"Use the project enquiry form or message RetailX on WhatsApp. The form prepares a message in WhatsApp; you must send it there for RetailX to receive your enquiry."}},
+        {"@type":"Question","name":"Is a custom domain included?","acceptedAnswer":{"@type":"Answer","text":"Custom domain registration is billed separately. A free RetailX subdomain option is available as part of project setup."}}
+      ]}
+    ]
   }
-  function closeModal(){
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-  closeBtn.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', closeModal);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const data = new FormData(form);
-    const sections = data.getAll('sections').join(', ') || '—';
-
-    const lines = [
-      '*New Project Brief — RetailX*',
-      '',
-      `*Full Name:* ${data.get('full_name') || '—'}`,
-      `*Business Name:* ${data.get('business_name') || '—'}`,
-      `*Phone:* ${data.get('phone') || '—'}`,
-      `*Email:* ${data.get('email') || '—'}`,
-      `*Asset Link:* ${data.get('asset_link') || '—'}`,
-      `*Sections Needed:* ${sections}`,
-      `*Other Sections:* ${data.get('other_sections') || '—'}`,
-      `*Domain Strategy:* ${data.get('domain_strategy') || '—'}`,
-      `*Creative Brief:* ${data.get('creative_brief') || '—'}`,
-    ];
-
-    const message = encodeURIComponent(lines.join('\n'));
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
-
-    // Open WhatsApp with the brief pre-filled so the user just hits send.
-    window.open(whatsappUrl, '_blank', 'noopener');
-
-    note.textContent = "Brief sent to WhatsApp. Confirm it there, then complete payment below.";
-    note.style.color = 'var(--violet)';
-    form.querySelectorAll('input, textarea, select, button').forEach(el => el.disabled = true);
-
-    openModal();
-  });
-</script>
-  <script>
-    (function () {
-
-const css = `
-.widgetify-whatsapp{
-position:fixed;
-bottom:24px;
-right:24px;
-z-index:999999;
-font-family:Inter,sans-serif;
-}
-
-.widgetify-chat{
-width:340px;
-background:#fff;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 20px 60px rgba(0,0,0,.18);
-display:none;
-animation:widgetifyFade .25s ease;
-}
-
-.widgetify-chat.active{
-display:block;
-}
-
-@keyframes widgetifyFade{
-from{
-opacity:0;
-transform:translateY(20px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-.widgetify-header{
-background:#4F46E5;
-padding:18px;
-color:#fff;
-}
-
-.widgetify-header h3{
-margin:0;
-font-size:18px;
-font-weight:700;
-}
-
-.widgetify-header p{
-margin-top:6px;
-font-size:13px;
-opacity:.9;
-}
-
-.widgetify-body{
-padding:18px;
-}
-
-.widgetify-message{
-background:#F5F7FF;
-padding:14px;
-border-radius:12px;
-font-size:14px;
-color:#444;
-margin-bottom:18px;
-line-height:1.6;
-}
-
-.widgetify-btn{
-width:100%;
-padding:15px;
-background:#25D366;
-border:none;
-border-radius:10px;
-color:#fff;
-font-size:15px;
-font-weight:700;
-cursor:pointer;
-transition:.25s;
-}
-
-.widgetify-btn:hover{
-transform:translateY(-2px);
-}
-
-.widgetify-footer{
-padding:12px;
-border-top:1px solid #eee;
-text-align:center;
-font-size:12px;
-}
-
-.widgetify-footer a{
-text-decoration:none;
-color:#666;
-}
-
-.widgetify-toggle{
-width:64px;
-height:64px;
-border-radius:50%;
-background:#4F46E5;
-display:flex;
-justify-content:center;
-align-items:center;
-cursor:pointer;
-box-shadow:0 10px 30px rgba(79,70,229,.35);
-margin-top:12px;
-margin-left:auto;
-color:#fff;
-transition:.25s;
-}
-
-.widgetify-toggle:hover{
-transform:scale(1.08);
-}
-
-@media(max-width:480px){
-.widgetify-chat{
-width:calc(100vw - 30px);
-}
-.widgetify-whatsapp{
-right:15px;
-bottom:15px;
-}
-}
-`;
-
-const style=document.createElement("style");
-style.innerHTML=css;
-document.head.appendChild(style);
-
-const widget=document.createElement("div");
-
-widget.className="widgetify-whatsapp";
-
-widget.innerHTML=`
-<div class="widgetify-chat" id="widgetifyChat">
-
-<div class="widgetify-header">
-<h3>Need a Website?</h3>
-<p>We're online. Chat with us now.</p>
-</div>
-
-<div class="widgetify-body">
-
-<div class="widgetify-message">
-👋 Looking for a fast, modern website? Send us a WhatsApp message and we'll respond shortly.
-</div>
-
-<button class="widgetify-btn">
-Chat on WhatsApp
-</button>
-
-</div>
-
-<div class="widgetify-footer">
-<a href="https://widgetifyai.vercel.app/" target="_blank">
-Powered by Widgetify
-</a>
-</div>
-
-</div>
-
-<div class="widgetify-toggle" id="widgetifyToggle">
-
-<svg width="30" height="30" viewBox="0 0 32 32" fill="currentColor">
-<path d="M19.11 17.21c-.29-.15-1.71-.84-1.98-.94-.27-.1-.46-.15-.66.15-.19.29-.76.94-.93 1.13-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.5.15-.17.17-.29.28-.48.1-.2.05-.37-.02-.52-.08-.15-.6-1.44-.82-1.97-.22-.53-.45-.46-.63-.46h-.55c-.19 0-.5.07-.76.34-.26.27-1 .98-1 2.39 0 1.4 1.03 2.77 1.17 2.96.15.19 2 3.17 4.84 4.45.68.29 1.21.47 1.62.6.68.22 1.3.19 1.8.12.55-.08 1.69-.69 1.93-1.36.24-.67.24-1.24.17-1.36-.06-.12-.23-.2-.5-.35z"/>
-<path d="M16 3C8.82 3 3 8.82 3 16c0 2.53.74 4.99 2.13 7.09L3 29l6.1-2.08A12.9 12.9 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3z"/>
-</svg>
-
-</div>
-`;
-
-document.body.appendChild(widget);
-
-document.getElementById("widgetifyToggle").onclick=function(){
-
-  document.getElementById("widgetifyChat").classList.toggle("active");
-
-};
-
-document.querySelector(".widgetify-btn").onclick=function(){
-
-  window.open(
-    "https://wa.me/919656778508?text="+encodeURIComponent("Hi! I'm interested in a website."),
-    "_blank"
-  );
-
-};
-
-})();
   </script>
-<script>fetch('/llms.txt').then(r=>r.text()).then(t=>(window.LLMS=t,document.head.insertAdjacentHTML('beforeend','<meta name="llms" content="/llms.txt">'))).catch(console.error);</script>
-  <script>fetch('/llms-full.txt').then(r=>r.text()).then(t=>(window.LLMS=t,document.head.insertAdjacentHTML('beforeend','<meta name="llms-full" content="/llms-full.txt">'))).catch(console.error);</script>
+  <style>
+    :root{--bg:#FAFAF9;--ink:#0B0B0E;--violet:#5B4FE0;--violet-deep:#453BC2;--lime:#D4FF3D;--line:#E4E4E1;--muted:#6B6B70;--panel:#F1F0EC;--green:#147d45;--radius:22px;--content:1120px}
+    *,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:88px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}img{max-width:100%;height:auto}a{color:inherit}button,input,select,textarea{font:inherit}.wrap{width:min(var(--content),calc(100% - 40px));margin-inline:auto}.display{font-family:"Space Grotesk",Inter,sans-serif}.mono{font-family:"JetBrains Mono",monospace}.eyebrow{font:500 11px/1.5 "JetBrains Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--violet)}.section{padding:88px 0}.section-head{max-width:700px;margin-bottom:38px}.section-head h2{font:700 clamp(2rem,4vw,3.2rem)/1.08 "Space Grotesk",sans-serif;letter-spacing:-.045em;margin:12px 0}.section-head p{color:var(--muted);font-size:18px;margin:0}.skip{position:absolute;left:12px;top:-60px;z-index:100;background:#fff;padding:12px 16px}.skip:focus{top:12px}.site-header{position:sticky;top:0;z-index:30;background:rgba(250,250,249,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{text-decoration:none;font:700 22px "Space Grotesk",sans-serif;letter-spacing:-.05em}.brand .dot{color:var(--violet)}.nav-links{display:flex;align-items:center;gap:26px}.nav-links a,.footer-links a{text-decoration:none;font-size:13px;color:var(--muted)}.nav-links a:hover,.footer-links a:hover{color:var(--violet)}.nav-cta{display:flex;gap:10px;align-items:center}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:12px 20px;border:1px solid transparent;border-radius:999px;text-decoration:none;font:500 12px "JetBrains Mono",monospace;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:transform .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease}.btn:hover{transform:translateY(-2px)}.btn-primary{background:var(--ink);color:var(--lime);box-shadow:0 10px 24px #0b0b0e1c}.btn-primary:hover{background:var(--violet-deep);color:#fff}.btn-wa{background:#1cae58;color:white;box-shadow:0 10px 22px #25d36630}.btn-wa:hover{background:#128c45}.btn-outline{border-color:var(--line);background:#fff;color:var(--ink)}.hero{position:relative;overflow:hidden;padding:88px 0 74px;background-image:linear-gradient(90deg,#e4e4e1 1px,transparent 1px);background-size:48px 100%}.hero-grid{display:grid;grid-template-columns:1.16fr .84fr;gap:50px;align-items:center}.hero h1{max-width:760px;margin:16px 0 20px;font:700 clamp(3rem,6.1vw,5.4rem)/.99 "Space Grotesk",sans-serif;letter-spacing:-.065em}.hero h1 em{font-style:normal;color:var(--violet)}.hero-copy{max-width:660px;color:#55555c;font-size:18px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:27px}.micro-trust{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:23px;color:var(--muted);font-size:12px}.micro-trust span:before{content:"✓";color:var(--violet);font-weight:700;margin-right:7px}.hero-card{padding:27px;border:1px solid #dedde7;border-radius:28px;background:rgba(255,255,255,.82);box-shadow:0 25px 70px #25204b12;transform:rotate(1deg)}.hero-card-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--line)}.hero-card-top strong{font:700 17px "Space Grotesk",sans-serif}.tag{border-radius:999px;padding:6px 10px;background:#eeedff;color:var(--violet);font:10px "JetBrains Mono",monospace;text-transform:uppercase}.journey{display:grid;gap:12px;margin:20px 0}.journey-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:white}.journey-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#f0efff;color:var(--violet);font-weight:700}.journey-row b{display:block;font-size:13px}.journey-row small{color:var(--muted);font-size:11px}.hero-card .btn{width:100%}.trust-strip{border-block:1px solid var(--line);background:#fff}.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);padding:17px 0;gap:10px}.trust-grid span{text-align:center;color:#515158;font:10px "JetBrains Mono",monospace;letter-spacing:.09em;text-transform:uppercase}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{padding:23px;border:1px solid var(--line);border-radius:var(--radius);background:#ffffffb8}.card-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:#efefff;color:var(--violet);font-size:19px;margin-bottom:18px}.card h3{margin:0 0 8px;font:600 20px/1.2 "Space Grotesk",sans-serif}.card p{margin:0;color:var(--muted);font-size:14px}.inline-link{display:inline-flex;margin-top:17px;color:var(--violet);font-weight:600;font-size:13px;text-decoration:none}.inline-link:hover{text-decoration:underline}.pain{background:var(--panel)}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}.value-card{padding:30px;border-radius:var(--radius);background:#fff;border:1px solid var(--line)}.value-card h3{font:600 24px/1.2 "Space Grotesk",sans-serif;margin:0 0 12px}.value-card p{color:var(--muted);margin:0}.list-check{display:grid;gap:10px;padding:0;list-style:none;color:#414149;font-size:14px}.list-check li:before{content:"✓";color:var(--violet);font-weight:700;margin-right:9px}.process{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;counter-reset:step}.process-card{padding:22px;border:1px solid var(--line);border-radius:18px;background:#fff}.step-number{font:500 11px "JetBrains Mono",monospace;color:var(--violet)}.process-card h3{font:600 19px "Space Grotesk",sans-serif;margin:10px 0 7px}.process-card p{font-size:13px;color:var(--muted);margin:0}.price-section{background:var(--ink);color:#fff}.price-grid{display:grid;grid-template-columns:1fr 370px;gap:50px;align-items:center}.price-section .section-head p{color:#ffffffa8}.price-notes{display:grid;gap:12px;color:#ffffffc2;font-size:14px}.price-box{padding:30px;border:1px solid #ffffff27;border-radius:24px;background:#111114}.price-box .price{font:700 54px/1 "Space Grotesk",sans-serif;margin:10px 0}.price-box small{color:#ffffff8a}.price-box ul{padding-left:18px;color:#ffffffd1;font-size:14px;margin:24px 0}.price-box li{margin:9px 0}.price-box .btn{width:100%;background:var(--lime);color:var(--ink)}.honest-note{padding:18px;border-left:3px solid var(--lime);background:#ffffff0b;color:#ffffffad;font-size:13px;margin-top:23px}.review-note{border:1px dashed #c9c7d7;padding:24px;border-radius:18px;background:#ffffffa8;color:var(--muted);font-size:14px}.faq-list{display:grid;gap:10px}.faq-item{border:1px solid var(--line);border-radius:15px;background:#fff;overflow:hidden}.faq-question{display:flex;width:100%;justify-content:space-between;gap:20px;align-items:center;padding:18px 20px;background:none;border:0;text-align:left;cursor:pointer;font-weight:600;color:var(--ink)}.faq-question span:last-child{color:var(--violet);font-size:20px;transition:transform .2s}.faq-question[aria-expanded=true] span:last-child{transform:rotate(45deg)}.faq-answer{padding:0 20px 18px;color:var(--muted);font-size:14px}.faq-answer[hidden]{display:none}.cta-band{padding:36px;border:1px solid #dcd9ff;border-radius:26px;background:linear-gradient(130deg,#f1efff,#f9fbe9);display:flex;justify-content:space-between;align-items:center;gap:24px}.cta-band h2{font:700 clamp(1.7rem,3vw,2.5rem)/1.1 "Space Grotesk",sans-serif;letter-spacing:-.04em;margin:7px 0}.cta-band p{color:var(--muted);margin:0}.cta-actions{display:flex;gap:10px;flex-wrap:wrap}.form-section{background:#fff;border-top:1px solid var(--line)}.form-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:58px;align-items:start}.form-aside{position:sticky;top:105px}.form-aside h2{font:700 clamp(2rem,4vw,3.1rem)/1.05 "Space Grotesk",sans-serif;letter-spacing:-.05em;margin:13px 0}.form-aside p{color:var(--muted)}.form{padding:27px;border:1px solid var(--line);border-radius:22px;background:var(--bg)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.field-wrap{display:grid;gap:6px}.field-wrap.full{grid-column:1/-1}.field-wrap label{font-size:12px;font-weight:600}.field{width:100%;min-height:48px;padding:11px 13px;border:1px solid #d9d9d5;border-radius:10px;background:white;color:var(--ink)}textarea.field{min-height:105px;resize:vertical}.field:focus{outline:2px solid #5b4fe055;border-color:var(--violet)}.field::placeholder{color:#9a9aa0}.form-privacy{font-size:11px;color:var(--muted);margin:12px 0}.form-status{min-height:24px;color:var(--green);font-size:13px;margin:12px 0 0}.form .btn{width:100%}.footer{padding:44px 0 112px}.footer-main{display:flex;justify-content:space-between;gap:32px}.footer-copy{max-width:340px;color:var(--muted);font-size:13px}.footer-links{display:flex;gap:20px;flex-wrap:wrap}.copyright{border-top:1px solid var(--line);margin-top:27px;padding-top:16px;color:var(--muted);font-size:11px}.sticky-actions{position:fixed;z-index:40;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;padding:8px;border:1px solid #ffffff24;border-radius:18px;background:#0b0b0ef2;box-shadow:0 15px 40px #0b0b0e30;width:min(420px,calc(100% - 24px))}.sticky-actions .btn{flex:1;min-height:46px;padding:10px;font-size:10px}.desktop-wa{position:fixed;right:22px;bottom:22px;z-index:39;width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:#1cae58;color:white;text-decoration:none;box-shadow:0 8px 26px #1cae5855}.desktop-wa svg{width:25px;height:25px;fill:currentColor}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}a:focus-visible,button:focus-visible{outline:3px solid var(--violet);outline-offset:3px}input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--violet);outline-offset:1px}
+    @media(min-width:768px){.sticky-actions{display:none}}@media(max-width:900px){.hero-grid{grid-template-columns:1fr .8fr;gap:25px}.cards{grid-template-columns:repeat(2,1fr)}.process{grid-template-columns:repeat(2,1fr)}.price-grid{grid-template-columns:1fr 320px;gap:28px}.form-layout{gap:28px}.nav-links{gap:14px}}
+    @media(max-width:767px){.wrap{width:min(var(--content),calc(100% - 32px))}.section{padding:64px 0}.nav{height:64px}.nav-links,.nav-wa{display:none}.hero{padding:60px 0 50px}.hero-grid{grid-template-columns:1fr;gap:32px}.hero h1{font-size:clamp(2.8rem,12vw,4.4rem)}.hero-card{max-width:520px;transform:none}.trust-grid{grid-template-columns:1fr 1fr}.trust-grid span{font-size:9px}.cards{grid-template-columns:1fr 1fr;gap:10px}.card{padding:18px}.card h3{font-size:18px}.two-col,.price-grid,.form-layout{grid-template-columns:1fr}.price-grid{gap:28px}.price-box{max-width:480px}.form-aside{position:static}.cta-band{align-items:flex-start;flex-direction:column;padding:25px}.form{padding:18px}.desktop-wa{display:none}.footer-main{flex-direction:column}.footer{padding-bottom:105px}}
+    @media(max-width:480px){.hero-actions .btn{width:100%}.cards,.process{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.field-wrap.full{grid-column:auto}.cta-actions{width:100%}.cta-actions .btn{flex:1}.micro-trust{gap:8px 13px}.hero-copy{font-size:16px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  </style>
+  <!-- Existing GA4 measurement ID retained; conversion events below are sent only when gtag is available. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P5Y8HJQ04B"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-P5Y8HJQ04B');</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="RetailX home">RetailX<span class="dot">.</span></a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a><a href="#process">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="btn btn-wa nav-wa" data-track="whatsapp" data-location="header" href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%27d%20like%20to%20discuss%20a%20website%20for%20my%20business.">WhatsApp us</a>
+        <a class="btn btn-primary" data-track="cta" data-location="header" href="#enquiry">Get a quote</a>
+      </div>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Websites for service businesses & local brands</span>
+          <h1 id="hero-title">Make your next website work harder for <em>your business.</em></h1>
+          <p class="hero-copy">RetailX builds clear, mobile-first websites that explain what you do and make it simple for the right customers to enquire—on WhatsApp or through a project brief.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" data-track="cta" data-location="hero" href="#enquiry">Get a free project quote <span aria-hidden="true">→</span></a>
+            <a class="btn btn-wa" data-track="whatsapp" data-location="hero" href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%27d%20like%20to%20discuss%20a%20website%20for%20my%20business.">Chat on WhatsApp</a>
+          </div>
+          <div class="micro-trust" aria-label="What to expect"><span>Starting at ₹1,599</span><span>Five-working-day process</span><span>Domain billed separately</span></div>
+        </div>
+        <aside class="hero-card" aria-label="A simple customer enquiry journey">
+          <div class="hero-card-top"><strong>A clearer path to enquiry</strong><span class="tag">Built around your goals</span></div>
+          <div class="journey">
+            <div class="journey-row"><span class="journey-icon" aria-hidden="true">01</span><div><b>Understand the offer</b><small>Visitors see what you do and who it helps.</small></div></div>
+            <div class="journey-row"><span class="journey-icon" aria-hidden="true">02</span><div><b>Build confidence</b><small>Clear scope, pricing and next steps.</small></div></div>
+            <div class="journey-row"><span class="journey-icon" aria-hidden="true">03</span><div><b>Start a conversation</b><small>WhatsApp and project enquiry options.</small></div></div>
+          </div>
+          <a class="btn btn-primary" data-track="cta" data-location="hero-card" href="#enquiry">Tell us about your project <span aria-hidden="true">→</span></a>
+        </aside>
+      </div>
+    </section>
+    <section class="trust-strip" aria-label="RetailX service approach"><div class="wrap trust-grid"><span>Mobile-first layouts</span><span>Fast static websites</span><span>Clear conversion paths</span><span>WhatsApp-ready enquiries</span></div></section>
+
+    <section class="section" id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="section-head"><span class="eyebrow">What we build</span><h2 id="services-title">A useful website, shaped around the way customers choose.</h2><p>For businesses that need a professional web presence and a straightforward next step—not more noise.</p></div>
+        <div class="cards">
+          <article class="card"><div class="card-icon" aria-hidden="true">✦</div><h3>Business websites</h3><p>Introduce your business, explain your services and give prospective customers a clear way to get in touch.</p><a class="inline-link" data-track="cta" data-location="service-business" href="#enquiry">Discuss a website →</a></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">↗</div><h3>Campaign landing pages</h3><p>Keep a campaign focused with a clear offer, helpful details and one visible enquiry action.</p><a class="inline-link" data-track="cta" data-location="service-landing" href="#enquiry">Plan a landing page →</a></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">◎</div><h3>Local business sites</h3><p>Present your services, service area and contact information in a mobile-friendly format.</p><a class="inline-link" data-track="cta" data-location="service-local" href="#enquiry">Improve your presence →</a></article>
+          <article class="card"><div class="card-icon" aria-hidden="true">✓</div><h3>WhatsApp enquiry flow</h3><p>Make it easy to start a conversation with a pre-filled message and a clear handoff to WhatsApp.</p><a class="inline-link" data-track="whatsapp" data-location="service-whatsapp" href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%27d%20like%20to%20ask%20about%20a%20WhatsApp-ready%20website.">Ask about setup →</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pain" aria-labelledby="benefits-title">
+      <div class="wrap">
+        <div class="section-head"><span class="eyebrow">A practical foundation</span><h2 id="benefits-title">Help good-fit customers understand why they should contact you.</h2><p>A website cannot promise sales. It can remove avoidable confusion and make the next step easier.</p></div>
+        <div class="two-col">
+          <article class="value-card"><h3>Make your offer easier to understand</h3><p>Organize your services, audience and key information so visitors can quickly work out whether you are the right fit.</p><ul class="list-check"><li>Customer-first page structure</li><li>Responsive, mobile-first layout</li><li>Clear calls to action and contact details</li></ul></article>
+          <article class="value-card"><h3>Give every enquiry a clear route</h3><p>Choose the contact flow that suits your customers and your team—without implying a form has been delivered when it has not.</p><ul class="list-check"><li>Pre-filled WhatsApp enquiry message</li><li>Project brief with service and budget options</li><li>Transparent scope and next steps</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="process" aria-labelledby="process-title">
+      <div class="wrap">
+        <div class="section-head"><span class="eyebrow">What to expect</span><h2 id="process-title">A simple four-step project process.</h2><p>RetailX's published workflow is designed to keep the project clear from the first brief to launch.</p></div>
+        <div class="process">
+          <article class="process-card"><span class="step-number">STEP 01</span><h3>Share your brief</h3><p>Tell us about your business, audience, goals and preferred contact flow.</p></article>
+          <article class="process-card"><span class="step-number">STEP 02</span><h3>Confirm the scope</h3><p>We discuss the page requirements, assets, domain choice and price before building.</p></article>
+          <article class="process-card"><span class="step-number">STEP 03</span><h3>Review the build</h3><p>Review the site and share feedback during the review stage.</p></article>
+          <article class="process-card"><span class="step-number">STEP 04</span><h3>Launch</h3><p>After approval, the website is prepared for launch. The stated process is five working days, subject to content and feedback.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section price-section" id="pricing" aria-labelledby="pricing-title">
+      <div class="wrap price-grid">
+        <div>
+          <div class="section-head"><span class="eyebrow" style="color:var(--lime)">Straightforward starting price</span><h2 id="pricing-title">Know the starting point before you enquire.</h2><p>Published website packages start at ₹1,599. Final scope and any additional costs are confirmed with you before work begins.</p></div>
+          <div class="price-notes"><span>✓ Mobile-first static website design</span><span>✓ Five-working-day delivery process</span><span>✓ WhatsApp enquiry flow</span><span>✓ Deployment support</span></div>
+          <p class="honest-note">Custom domain registration is billed separately. A free RetailX subdomain option is available. The final quote depends on the agreed project scope.</p>
+        </div>
+        <aside class="price-box" aria-label="Website package starting price"><span class="eyebrow" style="color:#ffffff8a">Website package from</span><div class="price">₹1,599</div><small>One-time starting price · custom domain extra</small><ul><li>Static business website</li><li>Responsive, mobile-first design</li><li>Clear enquiry path</li><li>Five-working-day process</li></ul><a class="btn" data-track="cta" data-location="pricing" href="#enquiry">Get a scope-based quote →</a></aside>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="proof-title">
+      <div class="wrap">
+        <div class="section-head"><span class="eyebrow">Trust without the guesswork</span><h2 id="proof-title">Clear expectations are part of good service.</h2><p>We don't publish invented client quotes, review scores or growth claims. Here's what you can verify before starting.</p></div>
+        <div class="two-col">
+          <article class="value-card"><h3>Transparent before work begins</h3><p>Share your requirements and get the project scope and applicable costs discussed before build work starts.</p></article>
+          <article class="value-card"><h3>Speak directly with RetailX</h3><p>Ask a question by WhatsApp or email. The project form prepares a message for you to review and send—your enquiry is only delivered after you send it.</p><p style="margin-top:12px"><a class="inline-link" data-track="whatsapp" data-location="trust" href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%27d%20like%20to%20ask%20a%20question%20before%20starting%20a%20project.">Ask us on WhatsApp →</a></p></article>
+        </div>
+        <p class="review-note" style="margin-top:18px">Client testimonials and measured project outcomes are not shown here because verified, publishable examples were not supplied. If you have client-approved reviews or case studies, they can be added here.</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq" style="background:var(--panel)" aria-labelledby="faq-title">
+      <div class="wrap">
+        <div class="section-head"><span class="eyebrow">Common questions</span><h2 id="faq-title">A few things to know before getting started.</h2></div>
+        <div class="faq-list">
+          <article class="faq-item"><h3 style="margin:0"><button class="faq-question" id="faq-q1" aria-expanded="false" aria-controls="faq-a1"><span>What does the ₹1,599 starting price include?</span><span aria-hidden="true">+</span></button></h3><div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>The published starting package covers premium static website design, a mobile-first layout, a WhatsApp enquiry flow and deployment support. The exact scope is confirmed before work begins. Domain registration is billed separately.</div></article>
+          <article class="faq-item"><h3 style="margin:0"><button class="faq-question" id="faq-q2" aria-expanded="false" aria-controls="faq-a2"><span>How long will the project take?</span><span aria-hidden="true">+</span></button></h3><div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>The stated process is five working days: brief, build, review and launch. Timing depends on receiving project content and feedback on time.</div></article>
+          <article class="faq-item"><h3 style="margin:0"><button class="faq-question" id="faq-q3" aria-expanded="false" aria-controls="faq-a3"><span>Is a custom domain included in the price?</span><span aria-hidden="true">+</span></button></h3><div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>No. Custom domain registration is billed separately. A free RetailX subdomain option is available as part of project setup.</div></article>
+          <article class="faq-item"><h3 style="margin:0"><button class="faq-question" id="faq-q4" aria-expanded="false" aria-controls="faq-a4"><span>Does the project form send my enquiry automatically?</span><span aria-hidden="true">+</span></button></h3><div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>No. After validation, the form opens WhatsApp with your project details pre-filled. Review the message and press Send in WhatsApp so RetailX receives it. No enquiry is stored or sent by this static page.</div></article>
+          <article class="faq-item"><h3 style="margin:0"><button class="faq-question" id="faq-q5" aria-expanded="false" aria-controls="faq-a5"><span>Can I request a free website review?</span><span aria-hidden="true">+</span></button></h3><div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden>You can message RetailX with your current website link to ask about a complimentary first-look review. Send the link through WhatsApp and confirm the review details directly.</div></article>
+          <article class="faq-item"><h3 style="margin:0"><button class="faq-question" id="faq-q6" aria-expanded="false" aria-controls="faq-a6"><span>What kind of businesses do you work with?</span><span aria-hidden="true">+</span></button></h3><div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden>RetailX describes its website services for small businesses, retail brands, startups, entrepreneurs, personal brands and service providers.</div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-bottom:0" aria-label="Ask for a website review"><div class="wrap"><div class="cta-band"><div><span class="eyebrow">Not sure what your site needs?</span><h2>Ask for a complimentary first-look website review.</h2><p>Send your current site link on WhatsApp and ask whether a review is available.</p></div><div class="cta-actions"><a class="btn btn-wa" data-track="whatsapp" data-location="audit" href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20could%20I%20ask%20for%20a%20complimentary%20first-look%20review%20of%20my%20website%3F%20Here%20is%20my%20site%3A%20">Ask about a free review →</a></div></div></div></section>
+
+    <section class="section form-section" id="enquiry" aria-labelledby="enquiry-title">
+      <div class="wrap form-layout">
+        <div class="form-aside"><span class="eyebrow">Start with a short brief</span><h2 id="enquiry-title">Tell us what you want your website to do.</h2><p>Share a few details to prepare a project enquiry in WhatsApp. You can edit the message before sending it.</p><p class="mono" style="font-size:11px;color:var(--muted)">No spam. No automated submission. Your WhatsApp message is sent only when you tap Send.</p><a class="inline-link" data-track="email_click" data-location="enquiry" href="mailto:adwebcomicllp@gmail.com">Prefer email? adwebcomicllp@gmail.com</a></div>
+        <form class="form" id="project-form" novalidate>
+          <div class="form-grid">
+            <div class="field-wrap"><label for="name">Your name <span aria-hidden="true">*</span></label><input class="field" id="name" name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="Your name"></div>
+            <div class="field-wrap"><label for="business">Business name <span aria-hidden="true">*</span></label><input class="field" id="business" name="business" autocomplete="organization" required minlength="2" maxlength="100" placeholder="Your business"></div>
+            <div class="field-wrap"><label for="phone">WhatsApp / phone number <span aria-hidden="true">*</span></label><input class="field" id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="[+0-9() .-]{7,24}" maxlength="24" placeholder="+91 98765 43210" aria-describedby="phone-hint"><small id="phone-hint" style="color:var(--muted);font-size:11px">Include country code if outside India.</small></div>
+            <div class="field-wrap"><label for="email">Email (optional)</label><input class="field" id="email" name="email" type="email" autocomplete="email" maxlength="120" placeholder="you@business.com"></div>
+            <div class="field-wrap"><label for="service">What do you need? <span aria-hidden="true">*</span></label><select class="field" id="service" name="service" required><option value="" selected disabled>Select a service</option><option>Business website</option><option>Campaign landing page</option><option>Local business website</option><option>WhatsApp enquiry setup</option><option>Not sure yet</option></select></div>
+            <div class="field-wrap"><label for="budget">Approximate budget <span aria-hidden="true">*</span></label><select class="field" id="budget" name="budget" required><option value="" selected disabled>Select a range</option><option>₹1,599 starting package</option><option>₹1,600–₹5,000</option><option>₹5,001–₹10,000</option><option>₹10,000+</option><option>Need help deciding</option></select></div>
+            <div class="field-wrap full"><label for="website">Current website (optional)</label><input class="field" id="website" name="website" type="url" inputmode="url" maxlength="200" placeholder="https://example.com"></div>
+            <div class="field-wrap full"><label for="details">What should the website help you achieve? (optional)</label><textarea class="field" id="details" name="details" maxlength="700" placeholder="Tell us about your customers, services, goals or timeline."></textarea></div>
+          </div>
+          <p class="form-privacy">By continuing, WhatsApp will open with the details you entered. Review the message before you choose to send it. This site does not store your form details.</p>
+          <button class="btn btn-primary" type="submit">Continue to WhatsApp <span aria-hidden="true">→</span></button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="wrap"><div class="footer-main"><div><a class="brand" href="#top">RetailX<span class="dot">.</span></a><p class="footer-copy">Mobile-first websites and straightforward enquiry journeys for businesses, retail brands and service providers.</p></div><div class="footer-links" aria-label="Contact links"><a data-track="whatsapp" data-location="footer" href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%27d%20like%20to%20discuss%20a%20website.">WhatsApp · +91 96567 78508</a><a data-track="email_click" data-location="footer" href="mailto:adwebcomicllp@gmail.com">Email</a><a href="https://instagram.com/retailx.site" target="_blank" rel="noopener noreferrer">Instagram</a><a href="/agreement.html">MSME agreement</a></div></div><div class="copyright">© <span id="year">2026</span> RetailX. Website package from ₹1,599; domain registration billed separately.</div></div></footer>
+  <a class="desktop-wa" data-track="whatsapp" data-location="floating" href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%27d%20like%20to%20discuss%20a%20website%20for%20my%20business." aria-label="Chat with RetailX on WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3C8.83 3 3 8.76 3 15.88c0 2.26.6 4.47 1.74 6.42L3 29l6.88-1.8a13.1 13.1 0 0 0 6.12 1.52h.01c7.16 0 13-5.77 13-12.87C29.01 8.74 23.17 3 16 3zm0 23.55c-1.9 0-3.77-.51-5.4-1.48l-.39-.23-4.08 1.07 1.09-3.97-.25-.41a10.7 10.7 0 0 1-1.65-5.65c0-5.9 4.83-10.7 10.78-10.7 2.88 0 5.58 1.11 7.61 3.13a10.6 10.6 0 0 1 3.16 7.57c0 5.9-4.84 10.67-10.78 10.67zm5.91-8c-.32-.16-1.9-.94-2.2-1.05-.3-.11-.52-.16-.73.16-.22.32-.84 1.05-1.03 1.27-.19.21-.38.24-.7.08-.32-.16-1.37-.5-2.6-1.59-.96-.85-1.61-1.9-1.8-2.22-.19-.32-.02-.5.14-.66.15-.15.32-.38.48-.57.16-.19.21-.32.32-.54.1-.21.05-.4-.03-.56-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.55-.73-.56h-.62c-.21 0-.56.08-.86.4-.3.32-1.13 1.1-1.13 2.69 0 1.58 1.16 3.12 1.32 3.33.16.21 2.28 3.47 5.53 4.87.77.33 1.37.53 1.84.68.77.24 1.47.21 2.02.13.62-.09 1.9-.78 2.17-1.53.27-.76.27-1.4.19-1.53-.08-.13-.3-.21-.62-.37z"/></svg></a>
+  <div class="sticky-actions" aria-label="Quick contact"><a class="btn btn-wa" data-track="whatsapp" data-location="sticky-mobile" href="https://wa.me/919656778508?text=Hi%20RetailX%2C%20I%27d%20like%20a%20website%20quote.">WhatsApp</a><a class="btn btn-primary" data-track="cta" data-location="sticky-mobile" href="#enquiry">Get a quote</a></div>
+  <script>
+    (function(){
+      const track=(name,params)=>{if(typeof window.gtag==='function')window.gtag('event',name,params||{});};
+      document.querySelectorAll('[data-track]').forEach(function(link){link.addEventListener('click',function(){track(link.dataset.track==='whatsapp'?'whatsapp_click':link.dataset.track==='email_click'?'email_click':'cta_click',{location:link.dataset.location||'site',destination:link.getAttribute('href')||''});});});
+      document.querySelectorAll('.faq-question').forEach(function(button){button.addEventListener('click',function(){const answer=document.getElementById(button.getAttribute('aria-controls'));const open=button.getAttribute('aria-expanded')==='true';button.setAttribute('aria-expanded',String(!open));answer.hidden=open;});});
+      const form=document.getElementById('project-form');const status=document.getElementById('form-status');
+      form.addEventListener('submit',function(event){event.preventDefault();status.textContent='';if(!form.reportValidity()){status.textContent='Please check the highlighted fields and try again.';return;}
+        const values=new FormData(form);const phone=String(values.get('phone')||'').trim();const digits=phone.replace(/\D/g,'');if(digits.length<7||digits.length>15){document.getElementById('phone').setCustomValidity('Enter a phone number with 7 to 15 digits.');document.getElementById('phone').reportValidity();document.getElementById('phone').setCustomValidity('');return;}
+        const lines=['Hi RetailX, I would like to enquire about a website project.','',`Name: ${values.get('name')}`,`Business: ${values.get('business')}`,`Phone / WhatsApp: ${phone}`,`Email: ${values.get('email')||'Not provided'}`,`Service: ${values.get('service')}`,`Budget: ${values.get('budget')}`,`Current website: ${values.get('website')||'Not provided'}`,`Project details: ${values.get('details')||'Not provided'}`];
+        const params=new URLSearchParams(window.location.search);const source=params.get('utm_source');const campaign=params.get('utm_campaign');if(source)lines.push(`How they found us: ${source}`);if(campaign)lines.push(`Campaign: ${campaign}`);
+        const url='https://wa.me/919656778508?text='+encodeURIComponent(lines.join('\n'));track('lead_whatsapp_handoff',{service:String(values.get('service')),budget:String(values.get('budget'))});
+        const opened=window.open(url,'_blank','noopener,noreferrer');if(opened){status.textContent='WhatsApp opened with your brief. Review it and press Send to deliver your enquiry to RetailX.';}else{status.innerHTML='Your WhatsApp message is ready. <a href="'+url.replace(/&/g,'&amp;')+'" target="_blank" rel="noopener noreferrer">Open WhatsApp to review and send it →</a>';}
+      });
+      document.getElementById('year').textContent=new Date().getFullYear();
+    })();
+  </script>
 </body>
 </html>
